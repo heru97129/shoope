@@ -1,0 +1,52 @@
+.menu{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 0;
+    &__slogan{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        h1{
+            float: left;
+            a{
+                text-decoration: none;
+                color: rgb(227, 194, 5);
+            }
+        }
+    }
+    .menu-right{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        &__items{
+            ul{
+                display: flex;
+                list-style: none;
+                li{
+                    margin: 0 1em;
+                    font-weight: 600;
+                    cursor: pointer;
+                    a{
+                       text-decoration: none;
+                       color:black; 
+                    }
+                }
+            }
+        }
+        &__icons{
+            ul{
+                display: flex;
+                list-style: none;
+
+                li{
+                    margin: 0 1em;
+                    cursor: pointer;
+
+                }
+            }
+        }
+    }
+}
