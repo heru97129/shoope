@@ -14,11 +14,15 @@ export const userSlice = createSlice({
          },
 
          updateName : (state,action)=>{
-
+            state.value.map(stat => {
+                if(stat.id === action.payload.id){
+                    stat.username = action.payload.username
+                }
+            })
          }
     }
 })
 
-export  const {addUsers,deleteUsers} = userSlice.actions
+export  const {addUsers,deleteUsers, updateName } = userSlice.actions
 
 export default userSlice.reducer
