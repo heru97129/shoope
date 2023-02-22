@@ -1,0 +1,47 @@
+.footer{
+
+    &__terms{
+        padding: 2em 0;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .terms-link{
+            ul{
+                display: flex;
+                list-style: none;
+                li{
+                    font-size: 1.3em;
+                  margin-right: 2em;
+                }
+            }
+        }
+    }
+
+
+    &__policy{
+        padding: 2em 0;
+
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .reseau{
+            ul{
+                display: flex;
+                list-style: none;
+                align-items: center;
+                justify-content: center;
+                
+                li{
+                  margin-left: 1em;
+                  display: flex;
+                  align-items: center;
+
+                  i{
+                    font-size: 1.5em;
+                  }
+                }
+            }
+        }
+    }
+}
