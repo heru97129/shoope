@@ -1,0 +1,13 @@
+.order__notyet {
+  padding: 1.5em 2em;
+  background-color: #EFEFEF;
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid #A18A68;
+}
+.order__notyet p:nth-child(1) {
+  font-weight: 600;
+}
+.order__notyet p:nth-child(2) {
+  color: #A18A68;
+}/*# sourceMappingURL=order.module.css.map */

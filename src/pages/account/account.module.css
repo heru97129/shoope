@@ -1,0 +1,43 @@
+.Account-title {
+  margin: 4em;
+}
+.Account-title h1 {
+  text-align: center;
+}
+
+.boutiq {
+  margin-bottom: 10em;
+}
+.boutiq__items {
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.867);
+  padding-bottom: 2em;
+}
+.boutiq__items ul {
+  display: flex;
+  list-style: none;
+}
+.boutiq__items ul li {
+  margin-right: 4em;
+  font-size: 1.2em;
+  font-weight: 500;
+  transition: 0.2s ease-in;
+  cursor: pointer;
+}
+.boutiq__items ul .li-selected {
+  position: relative;
+}
+.boutiq__items ul .li-selected::after {
+  position: absolute;
+  bottom: -33px;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 3px;
+  background-color: black;
+}
+.boutiq__items ul .strong {
+  font-weight: 600;
+}
+.boutiq__content {
+  margin-top: 2em;
+}/*# sourceMappingURL=account.module.css.map */

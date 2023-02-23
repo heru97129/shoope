@@ -12,7 +12,7 @@ export function Footer({}) {
           </ul>
         </div>
 
-        <div className="terms-newsletter">
+        <div className={styles["terms-newsletter"]}>
           <input placeholder="Give an email, get the newsletter." />
         </div>
       </div>

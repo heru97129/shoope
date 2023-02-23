@@ -1,7 +1,17 @@
 .footer{
-
+    position: relative;
+    margin-top: 2em;
+    &::after{
+        content: '';
+        position: absolute;
+        top: -5px;
+        border: 1px dashed rgba(0, 0, 0, 0.267);
+        left: 0;
+        width: 100%;
+        height: 0px;
+    }
     &__terms{
-        padding: 2em 0;
+        padding: 3em 0;
         display: flex;
         width: 100%;
         justify-content: space-between;
@@ -16,11 +26,29 @@
                 }
             }
         }
+        .terms-newsletter{
+            input{
+                background: url(../../../public/images/arrow.png) no-repeat scroll 100% 15px;
+
+                border-right: none;
+                border-top: none;
+                border-left: none;width: 300px;
+                padding: 1em 4em 1em 0em;
+            &:focus{
+                outline: none;
+            }
+            &::placeholder{
+                font-size: 1.2em;
+                font-weight: 600;
+            }
+            }
+            
+        }
     }
 
 
     &__policy{
-        padding: 2em 0;
+        padding: 3em 0;
 
         width: 100%;
         display: flex;

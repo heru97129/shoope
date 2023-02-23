@@ -1,0 +1,45 @@
+.lastest {
+  margin: 3em 0 10em 0;
+  width: 100%;
+}
+.lastest__title {
+  margin-bottom: 4em;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.lastest__title h2 {
+  float: right;
+}
+.lastest__title div {
+  width: 100%;
+}
+.lastest__title div:nth-child(2) {
+  display: flex;
+  justify-content: flex-end;
+}
+.lastest__grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5em;
+}
+.lastest__grid p {
+  margin: 0.5em 0;
+}
+.lastest__grid .card {
+  width: 100%;
+  height: 700px;
+}
+.lastest__grid .card__title {
+  margin-bottom: 1em;
+}
+.lastest__grid .card img {
+  width: 100%;
+  height: 400px;
+}
+
+.gold {
+  color: rgb(209, 178, 5);
+}/*# sourceMappingURL=lastest.module.css.map */

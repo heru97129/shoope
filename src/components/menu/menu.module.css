@@ -1,0 +1,68 @@
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 0;
+  position: relative;
+}
+.menu::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  border: 1px dashed rgba(0, 0, 0, 0.267);
+  left: 0;
+  width: 100%;
+  height: 0px;
+  z-index: -1;
+}
+.menu__slogan {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.menu__slogan h1 {
+  float: left;
+}
+.menu__slogan h1 a {
+  text-decoration: none;
+  color: rgb(227, 194, 5);
+}
+.menu .menu-right {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.menu .menu-right__items ul {
+  display: flex;
+  list-style: none;
+}
+.menu .menu-right__items ul .li-shop {
+  position: relative;
+}
+.menu .menu-right__items ul .li-shop::after {
+  position: absolute;
+  content: "";
+  bottom: -33px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: black;
+}
+.menu .menu-right__items ul li {
+  margin: 0 1em;
+  font-weight: 600;
+  cursor: pointer;
+}
+.menu .menu-right__items ul li a {
+  text-decoration: none;
+  color: black;
+}
+.menu .menu-right__icons ul {
+  display: flex;
+  list-style: none;
+}
+.menu .menu-right__icons ul li {
+  margin: 0 1em;
+  cursor: pointer;
+}/*# sourceMappingURL=menu.module.css.map */

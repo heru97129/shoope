@@ -1,0 +1,39 @@
+.ourstory{
+    margin: 4em 0 8em 0;
+    &__title{
+        text-align: center;
+        h1{
+            text-transform: capitalize;
+        }
+    }
+
+
+    &__story{
+        margin-top: 4em;
+        img{
+            
+            width: 100%;
+        }
+    }
+
+    .text{
+        padding: 2em  20em;
+        img{
+            margin: 3em 0;
+        }
+
+        h1{
+            margin: .8em 0;
+        }
+        p{
+            margin: 0 0 2em 0;
+        }
+
+        ul{
+            margin-left: 2em;
+            li{
+                margin: .5em 0;
+            }
+        }
+    }
+}

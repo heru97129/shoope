@@ -1,37 +1,19 @@
 import React from "react";
 import styles from './lastest.module.scss'
-import { faker } from '@faker-js/faker';
-
-console.log(faker)
-function createProducts(id){
-    return {
-        id:id,
-        name:faker.commerce.productName(),
-        product : faker.commerce.product(),
-        price : faker.commerce.price(),
-        description : faker.commerce.productDescription(),
-        Material : faker.commerce.productMaterial(),
-        department:faker.commerce.department(),
-        productAdjective : faker.commerce.productAdjective(),
-        images: faker.image.fashion()
+import { useEffect,useState } from "react";
 
 
-        
-    }
-}
-
-
-let users = []
-
-Array.from({length:6}).forEach((el,i)=>{
-    users.push(createProducts(i))
-})
-
-
-console.log(users)
 
 export function Lastest({}) {
-const userList = users
+
+let [products,setproducts] = useState()
+
+useEffect(()=>{
+    fetch("https://fakestoreapi.com/products")
+    .then((res) => res.json())
+    .then((json) => setproducts(json.slice(0,6)));
+},[])
+console.log(products)
   return (
     <div className={styles['lastest']}>
       <div className={styles['lastest__title']}>
@@ -43,18 +25,17 @@ const userList = users
         </div>
       </div>
         <div className={styles['lastest__grid']}>
-            {userList.map(articles =>{
-                let {id,name,product,price,description, Material,department,productAdjective,images} =  articles
+        {products && products.map(articles =>{
+                let {category,description,id,image,price,title} =  articles
 
 
                 return(
-                    <div className={styles['card']}>
-                      <h2 className={`${styles["card__title"]} ${styles['gold']}`}>{name}</h2>
-                      <img src={images}></img>
-                      <p>{product}</p>
+                    <div className={styles['card']} key={id}>
+                      <h2 className={`${styles["card__title"]} ${styles['gold']}`}>{title}</h2>
+                      <img src={image}></img>
                       <p>$ {price} </p>
                       <p>{description}</p>
-                      <p>{Material}</p>
+                      <p>{category}</p>
 
                     </div>
                 )

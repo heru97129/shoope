@@ -1,0 +1,10 @@
+.adresses {
+  margin: 4em 0;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+.adresses .add {
+  color: #A18A68;
+  margin: 1.5em 0;
+}/*# sourceMappingURL=Adresse.module.css.map */

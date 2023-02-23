@@ -1,0 +1,33 @@
+.ourstory {
+  margin: 4em 0 8em 0;
+}
+.ourstory__title {
+  text-align: center;
+}
+.ourstory__title h1 {
+  text-transform: capitalize;
+}
+.ourstory__story {
+  margin-top: 4em;
+}
+.ourstory__story img {
+  width: 100%;
+}
+.ourstory .text {
+  padding: 2em 20em;
+}
+.ourstory .text img {
+  margin: 3em 0;
+}
+.ourstory .text h1 {
+  margin: 0.8em 0;
+}
+.ourstory .text p {
+  margin: 0 0 2em 0;
+}
+.ourstory .text ul {
+  margin-left: 2em;
+}
+.ourstory .text ul li {
+  margin: 0.5em 0;
+}/*# sourceMappingURL=ourstory.module.css.map */

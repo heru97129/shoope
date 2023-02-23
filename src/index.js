@@ -7,10 +7,11 @@ import reportWebVitals from "./reportWebVitals";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import usersReducer from './features/Users'
-import Shop from "./pages/Shop";
-import Blog from "./pages/Blog";
-import OurStory from "./pages/OurStory";
+import Shop from "./pages/shop/Shop";
+import Blog from "./pages/blog/Blog";
+import OurStory from "./pages/ourstory/OurStory";
 import Layout from "./components/layout/Layout";
+import Account from "./pages/account/Account";
 
 const store = configureStore({
   reducer : {
@@ -28,6 +29,7 @@ root.render(
       <Route path="Blog" element={<Blog />} />
       <Route path="Shop" element={<Shop />} />
       <Route path="OurStory" element={<OurStory />} />
+      <Route path="account"   element={<Account />}/>
     </Routes>
   </BrowserRouter>
   </Provider>
