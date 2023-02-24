@@ -26,6 +26,9 @@
   font-size: 1.4em;
   font-weight: 600;
 }
+.shop .shopstore__search .search-input input:focus {
+  outline: none;
+}
 .shop .shopstore__search .select-input {
   margin: 2em 0 0 0;
   display: flex;
@@ -36,6 +39,9 @@
   margin: 1em 0 0.5em 0;
   font-size: 1.2em;
   font-weight: 600;
+}
+.shop .shopstore__search .select-input select:focus {
+  outline: none;
 }
 .shop .shopstore__search .price-range {
   margin: 2em 0;

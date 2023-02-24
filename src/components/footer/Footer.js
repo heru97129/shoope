@@ -21,16 +21,16 @@ export function Footer({}) {
         <div className={styles['reseau']}>
           <ul>
             <li>
-              <i class="fa-brands fa-linkedin-in"></i>
+              <i className="fa-brands fa-linkedin-in"></i>
             </li>
             <li>
-              <i class="fa-brands fa-facebook-f"></i>
+              <i className="fa-brands fa-facebook-f"></i>
             </li>
             <li>
-              <i class="fa-brands fa-instagram"></i>
+              <i className="fa-brands fa-instagram"></i>
             </li>
             <li>
-              <i class="fa-brands fa-twitter"></i>
+              <i className="fa-brands fa-twitter"></i>
             </li>
           </ul>
         </div>

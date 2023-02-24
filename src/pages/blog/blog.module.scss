@@ -24,6 +24,9 @@
                 font-size: 1.4em;
                 font-weight: 600;
             }
+            &:focus{
+                outline: none;
+            }
             margin-bottom: 3em;
         }
     
@@ -33,6 +36,7 @@
                 list-style: none;
                 li{
                     margin: 1em 0;
+                    cursor: pointer;
                 }
             }
         }

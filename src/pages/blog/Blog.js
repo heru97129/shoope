@@ -2,21 +2,26 @@ import React, { useEffect,useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from '../../components/layout/Layout';
 import styles from './blog.module.scss'
-
+import { useSelector ,useDispatch} from 'react-redux'
+import {  filterCategory,deleteUsers,updateName } from '../../features/Users';
 
 
 
 function Blog(props) {
-    let [products,setproducts] = useState()
+  const userList = useSelector((state)=> state.users.value)
+  const dispatch = useDispatch()
 
-    useEffect(()=>{
-        fetch("https://fakestoreapi.com/products")
-        .then((res) => res.json())
-        .then((json) => setproducts(json.slice(6,10)));
-    },[])
+let [data,setdata] = useState(userList)
+  
+    function SwitchCategory(e){
+      console.log(e.target.innerText.toLowerCase())
+      let categories = e.target.innerText.toLowerCase()
+      const copy = userList.filter(el => el.category === categories)
+      setdata(copy)
+     console.log(data)
+    }
 
 
-    console.log(products)
     return (
         <Layout>
            <div className={styles['container']}>
@@ -29,10 +34,10 @@ function Blog(props) {
                     Categories 
                 </h2>
                 <ul>
-                    <li>Fashion</li>
-                    <li>Style</li>
-                    <li>Accessoiries</li>
-                    <li>Seasons</li>
+                    <li onClick={SwitchCategory}>Jewelery</li>
+                    <li onClick={SwitchCategory}>Electronics</li>
+                    <li onClick={SwitchCategory}>Women's clothing</li>
+                    <li onClick={SwitchCategory}>Men's clothing</li>
 
                 </ul>
 
@@ -41,7 +46,7 @@ function Blog(props) {
           
              <div className={styles['blog__articles']}>
              <div className={styles['grid']}>
-            {products && products.map(articles =>{
+            {data && data.map(articles =>{
                 let {category,description,id,image,price,title} =  articles
 
 

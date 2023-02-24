@@ -8,7 +8,9 @@ function Shop(props) {
     useEffect(()=>{
         fetch("https://fakestoreapi.com/products")
         .then((res) => res.json())
-        .then((json) => setproducts(json.slice(0,6)));
+        .then((json) => {
+          console.log(json)
+          setproducts(json.slice(0,6))});
     },[])
     console.log(products)
   return (

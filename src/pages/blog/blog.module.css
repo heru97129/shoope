@@ -30,11 +30,15 @@
   font-size: 1.4em;
   font-weight: 600;
 }
+.container .blog__search input:focus {
+  outline: none;
+}
 .container .blog__search .categories ul {
   list-style: none;
 }
 .container .blog__search .categories ul li {
   margin: 1em 0;
+  cursor: pointer;
 }
 .container .blog__articles {
   width: 75%;
