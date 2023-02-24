@@ -1,19 +1,28 @@
 import React from "react";
 import styles from './lastest.module.scss'
 import { useEffect,useState } from "react";
-
+import { selectAllPosts } from '../../features/Users';
+import { fetchPosts } from '../../features/Users';
+import { useSelector ,useDispatch} from 'react-redux'
 
 
 export function Lastest({}) {
 
-let [products,setproducts] = useState()
+let [products,setproducts] = useState(null)
 
-useEffect(()=>{
-    fetch("https://fakestoreapi.com/products")
-    .then((res) => res.json())
-    .then((json) => setproducts(json.slice(0,6)));
-},[])
-console.log(products)
+
+const dispatch = useDispatch()
+const post = useSelector(selectAllPosts)
+useEffect(() => {
+  dispatch(fetchPosts());
+  const copy = post.slice(0,6)
+  setproducts(post)
+  console.log(products,'effect')
+}, [dispatch]);
+
+
+
+console.log(post)
   return (
     <div className={styles['lastest']}>
       <div className={styles['lastest__title']}>
@@ -25,7 +34,7 @@ console.log(products)
         </div>
       </div>
         <div className={styles['lastest__grid']}>
-        {products && products.map(articles =>{
+        {post && post.slice(0,6).map(articles =>{
                 let {category,description,id,image,price,title} =  articles
 
 

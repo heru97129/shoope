@@ -1,22 +1,29 @@
 import React, { useEffect,useState } from "react";
-import { Link } from "react-router-dom";
 import Layout from '../../components/layout/Layout';
 import styles from './blog.module.scss'
 import { useSelector ,useDispatch} from 'react-redux'
-import {  filterCategory,deleteUsers,updateName } from '../../features/Users';
-
+import { selectAllPosts } from '../../features/Users';
+import { fetchPosts } from '../../features/Users';
 
 
 function Blog(props) {
-  const userList = useSelector((state)=> state.users.value)
   const dispatch = useDispatch()
+  const post = useSelector(selectAllPosts)
 
-let [data,setdata] = useState(userList)
+  useEffect(() => {
+    dispatch(fetchPosts('pending'));
+  }, [dispatch]);
+
+
+
+  console.log(post)
+
+let [data,setdata] = useState(post)
   
     function SwitchCategory(e){
       console.log(e.target.innerText.toLowerCase())
       let categories = e.target.innerText.toLowerCase()
-      const copy = userList.filter(el => el.category === categories)
+      const copy = post.filter(el => el.category === categories)
       setdata(copy)
      console.log(data)
     }

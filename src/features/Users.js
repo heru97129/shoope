@@ -1,33 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit";
-import  {products}  from '../Fakedata'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const userSlice = createSlice({
-    name:'users',
-    initialState : {value: products},
-    reducers :{
-        filterCategory : (state,action) =>{
-         state.value = state.value.filter(el =>{
-            
-            console.log(state.value)
-          return  el.category === action.payload
-        
-        })
-        }
-        // deleteUsers : (state,action) =>{
-        //     state.value = state.value.filter(state => {
-        //         return state.id !== action.payload})
-        //  },
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await axios.get("https://fakestoreapi.com/products");
+  return response.data;
+});
 
-        //  updateName : (state,action)=>{
-        //     state.value.map(stat => {
-        //         if(stat.id === action.payload.id){
-        //             stat.username = action.payload.username
-        //         }
-        //     })
-        //  }
-    }
-})
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState: {
+    data: [],
+    status: 'idle',
+    error: null,
+  },
+  reducers: {},
+  extraReducers: {
+    [fetchPosts.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [fetchPosts.fulfilled]: (state, action) => {
+      state.status = 'succeeded';
+      state.data = action.payload;
+    },
+    [fetchPosts.rejected]: (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message;
+    },
+  },
+});
 
-export  const { filterCategory,deleteUsers, updateName } = userSlice.actions
+export const selectAllPosts = (state) => state.posts.data;
 
-export default userSlice.reducer
+export default postsSlice.reducer;

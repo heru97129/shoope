@@ -6,19 +6,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import usersReducer from './features/Users'
 import Shop from "./pages/shop/Shop";
 import Blog from "./pages/blog/Blog";
 import OurStory from "./pages/ourstory/OurStory";
 import Layout from "./components/layout/Layout";
 import Account from "./pages/account/Account";
+import postsReducer from './features/Users';
 
 const store = configureStore({
-  reducer : {
-    users: usersReducer
+  reducer: {
+    posts: postsReducer,
   }
-})
-
+});
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
