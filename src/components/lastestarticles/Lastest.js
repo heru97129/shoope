@@ -16,9 +16,19 @@ const post = useSelector(selectAllPosts)
 useEffect(() => {
   dispatch(fetchPosts());
   const copy = post.slice(0,6)
-  setproducts(post)
+
+  
+  if(post.length > 0){
+    const copy = post.slice(0,6)
+    setproducts(copy)
+    console.log(products )
+
+        
+  }
+
+
   console.log(products,'effect')
-}, [dispatch]);
+}, [post.length > 0]);
 
 
 
@@ -34,7 +44,7 @@ console.log(post)
         </div>
       </div>
         <div className={styles['lastest__grid']}>
-        {post && post.slice(0,6).map(articles =>{
+        {products && products.map(articles =>{
                 let {category,description,id,image,price,title} =  articles
 
 
