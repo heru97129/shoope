@@ -4,6 +4,10 @@
 .container h1 {
   margin: 1em 0 1em 0.5em;
 }
+.container a {
+  text-decoration: none;
+  color: black;
+}
 .container .blog {
   display: flex;
 }

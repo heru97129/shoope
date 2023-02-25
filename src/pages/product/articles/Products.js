@@ -1,0 +1,74 @@
+import React from "react";
+import { useEffect, useState } from "react";
+import styles from "./product.module.scss";
+import Layout from "../../../components/layout/Layout";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAllPosts } from "../../../features/Users";
+import { fetchPosts } from "../../../features/Users";
+import {
+  Link,
+  useParams,
+  useLocation,
+  useHistory,
+  useRouteMatch,
+} from "react-router-dom";
+
+function Products(props) {
+  const dispatch = useDispatch();
+  const post = useSelector(selectAllPosts);
+  const router = useLocation();
+  console.log(router.pathname, "route product");
+
+  let [data, setdata] = useState();
+
+  useEffect(() => {
+    dispatch(fetchPosts("fulfilled"));
+
+    if (post.length > 0) {
+      let copy = post.filter(
+        (product) => product.id === Number(router.pathname.substring(9))
+      );
+      setdata(copy);
+    }
+  }, [post.length > 0]);
+  console.log(data);
+
+  return (
+    <Layout>
+      <div className={styles["prod"]}>
+        yo
+        <div className={styles["prod__describ"]}>
+          {data &&
+            data.map((product) => {
+              let { category, description, id, image, price, title } = product;
+
+              return (
+                <div>
+                  <div className={styles["product-pic"]}>
+                    <div className={styles['grid-pic']}>
+                     <div>
+                        <img src={image}/>
+                     </div>
+                     <div>
+                        <img src={image}/>
+                     </div>
+                     <div>
+                        <img src={image}/>
+                     </div>
+                     <div>
+                        <img src={image}/>
+                     </div>
+
+                    </div>
+                  </div>
+                  <div className={styles["product-infos"]}></div>
+                </div>
+              );
+            })}
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+export default Products;

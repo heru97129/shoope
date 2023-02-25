@@ -4,6 +4,12 @@ import styles from './blog.module.scss'
 import {useSelector, useDispatch} from 'react-redux'
 import {selectAllPosts} from '../../features/Users';
 import {fetchPosts} from '../../features/Users';
+import {  Link,  useParams,
+    useLocation,
+    useHistory,
+    useRouteMatch, } from "react-router-dom";
+    
+
 
 function Blog(props) {
     const dispatch = useDispatch()
@@ -71,7 +77,8 @@ function Blog(props) {
                                 } = articles
 
                                 return (
-                                    <div className={styles['card']} key={id}>
+                                    <Link to={`/product/${id}`}>
+                                    <div className={styles['card']} key={id} >
                                         <h2 className={`${styles["card__title"]} ${styles['gold']}`}>{title}</h2>
                                         <img src={image}></img>
                                         <p>$ {price}
@@ -80,6 +87,7 @@ function Blog(props) {
                                         <p>{category}</p>
 
                                     </div>
+                                    </Link>
                                 )
                             })}
                         </div>

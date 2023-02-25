@@ -1,18 +1,30 @@
 import React, { useEffect,useState } from "react";
 import Layout from "../../components/layout/Layout";
 import styles from "./shop.module.scss";
+import {selectAllPosts} from '../../features/Users';
+import {fetchPosts} from '../../features/Users';
+import {useSelector, useDispatch} from 'react-redux'
 
 function Shop(props) {
-    let [products,setproducts] = useState()
+  const dispatch = useDispatch()
+  const post = useSelector(selectAllPosts)
 
-    useEffect(()=>{
-        fetch("https://fakestoreapi.com/products")
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json)
-          setproducts(json.slice(0,6))});
-    },[])
-    console.log(products)
+
+  let [data,
+      setdata] = useState(post)
+
+  useEffect(() => {
+      dispatch(fetchPosts('fulfilled'));
+
+
+      if(post.length > 0){
+        
+        setdata(post)
+        console.log(data,post )
+
+      }
+  }, [post.length > 0]);
+
   return (
     <Layout>
       <div className={styles["shop"]}>
@@ -66,7 +78,7 @@ function Shop(props) {
           </div>
           <div className={styles["shopstore__articles"]}>
           <div className={styles['grid']}>
-            {products && products.map(articles =>{
+            {data && data.map(articles =>{
                 let {category,description,id,image,price,title} =  articles
 
 
