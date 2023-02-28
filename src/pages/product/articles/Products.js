@@ -81,6 +81,16 @@ function Products(props) {
                     <p>ADD TO CART</p>
                       </div>
                       </div>
+                      <div className={styles['reseau']}>
+                        <ul>
+                            <li><i class="fa-regular fa-heart"></i></li>
+                            <li>|</li>
+                            <li><i class="fa-regular fa-envelope"></i></li>
+                            <li><i class="fa-brands fa-facebook-f"></i></li>
+                            <li><i class="fa-brands fa-instagram"></i></li>
+                            <li><i class="fa-brands fa-twitter"></i></li>
+                        </ul>
+                      </div> 
                      </div>
                   
                 </div>
