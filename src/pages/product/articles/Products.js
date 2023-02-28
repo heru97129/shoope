@@ -36,14 +36,13 @@ function Products(props) {
   return (
     <Layout>
       <div className={styles["prod"]}>
-        yo
         <div className={styles["prod__describ"]}>
           {data &&
             data.map((product) => {
               let { category, description, id, image, price, title } = product;
 
               return (
-                <div>
+                <div className={styles['container']}>
                   <div className={styles["product-pic"]}>
                     <div className={styles['grid-pic']}>
                      <div>
@@ -52,7 +51,7 @@ function Products(props) {
                      <div>
                         <img src={image}/>
                      </div>
-                     <div>
+                     <div>  
                         <img src={image}/>
                      </div>
                      <div>
@@ -61,7 +60,29 @@ function Products(props) {
 
                     </div>
                   </div>
-                  <div className={styles["product-infos"]}></div>
+                  <div className={styles["product-infos"]}>
+                    <h2>{title}</h2>
+                    <p className={styles["product-infos__price"]}>$ {price}</p>
+                     <p>{description}</p>
+                     <div className={styles["product-infos__btn"]}>
+                      <div className={styles['btn-add']}>
+                        <div>
+                          <p>-</p>
+                        </div>
+                        <div>
+                          <p>0</p>
+                        </div>
+                        <div>
+                          <p>+</p>
+                          </div> 
+                      </div>
+                   
+                     <div className={styles['btn-add']}>
+                    <p>ADD TO CART</p>
+                      </div>
+                      </div>
+                     </div>
+                  
                 </div>
               );
             })}
