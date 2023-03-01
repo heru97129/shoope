@@ -1,4 +1,5 @@
 import React from "react";
+import { Similar } from "../SimilarItems/Similar";
 import styles from "./informations.module.scss";
 
 function AddInformations({ articles, product }) {
@@ -19,20 +20,9 @@ function AddInformations({ articles, product }) {
           })}
       </div>
       <div className={styles["informations__grid"]}>
-        {articles &&
-          articles.map((product, i) => {
-            let { category, description, id, image, price, title } = product;
+      <h2>Similar Items</h2>
 
-            return (
-              <div className={styles["card"]} key={i}>
-                <img src={image} />
-                <p>
-                  <strong>{title}</strong>{" "}
-                </p>
-                <p>$ {price}</p>
-              </div>
-            );
-          })}
+           <Similar articles={articles} />
       </div>
     </div>
   );

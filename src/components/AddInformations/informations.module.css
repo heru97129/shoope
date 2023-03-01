@@ -7,22 +7,6 @@
 .informations__infos ul li {
   margin: 0.8em 0;
 }
-.informations__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-.informations__grid .card {
-  width: 400px;
-  height: 400px;
-  padding: 1em;
-}
-.informations__grid .card img {
-  width: 100%;
-  height: 350px;
-}
-.informations__grid .card p {
-  margin: 1em 0;
-}
-.informations__grid .card p:nth-child(3) {
-  color: rgb(227, 194, 5);
+.informations__grid h2 {
+  margin-bottom: 2em;
 }/*# sourceMappingURL=informations.module.css.map */

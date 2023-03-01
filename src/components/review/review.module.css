@@ -4,6 +4,32 @@
 .review .form__commentary {
   width: 100%;
 }
+.review .form__commentary .coms {
+  padding: 0 4em 0 0;
+}
+.review .form__commentary .coms h2 {
+  margin-bottom: 3em;
+}
+.review .form__commentary .coms__comment {
+  padding: 0 0 3em 0;
+  position: relative;
+}
+.review .form__commentary .coms__comment::after {
+  content: "";
+  bottom: 0;
+  left: 0;
+  border: 1px dashed rgba(0, 0, 0, 0.317);
+  position: absolute;
+  width: 100%;
+}
+.review .form__commentary .coms__comment p {
+  margin: 1em 0;
+}
+.review .form__commentary .coms__comment .rating-com ul {
+  display: flex;
+  list-style: none;
+  gap: 1em;
+}
 .review .form__add {
   width: 100%;
 }
@@ -46,4 +72,10 @@
   background-color: black;
   color: white;
   margin-top: 2em;
+}
+.review .products {
+  margin: 3em 0 0 0;
+}
+.review .products h2 {
+  margin-bottom: 2em;
 }/*# sourceMappingURL=review.module.css.map */
