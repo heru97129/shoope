@@ -58,9 +58,16 @@
 }
 .container .blog__articles .grid .card h2 {
   font-size: 1.2em;
-  margin: 0.5em 0;
+  margin-bottom: 1.5em;
 }
 .container .blog__articles .grid .card img {
-  width: 100%;
+  width: 70%;
   height: 300px;
+  margin: 0 3em;
+}
+.container .blog__articles .grid .card p {
+  margin: 1em;
+}
+.container .blog__articles .grid .card p::nth-child(1) {
+  font-weight: 600;
 }/*# sourceMappingURL=blog.module.css.map */

@@ -1,5 +1,12 @@
 import React from "react";
 import styles from './similar.module.scss'
+import {
+  Link,
+  useParams,
+  useLocation,
+  useHistory,
+  useRouteMatch,
+} from "react-router-dom";
 
 export function Similar({ articles }) {
   return (
@@ -8,6 +15,8 @@ export function Similar({ articles }) {
         articles.map((product) => {
           let { category, description, id, image, price, title } = product;
           return (
+            <Link to={`/product/${id}`}>
+
             <div className={styles["card"]} key={id}>
               <img src={image} />
               <p>
@@ -15,6 +24,8 @@ export function Similar({ articles }) {
               </p>
               <p>$ {price}</p>
             </div>
+            </Link>
+
           );
         })}
     </div>

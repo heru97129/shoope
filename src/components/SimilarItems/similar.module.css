@@ -3,6 +3,12 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+.similar a {
+  text-decoration: none;
+}
+.similar a p {
+  color: black;
+}
 .similar .card {
   width: 400px;
   height: 400px;

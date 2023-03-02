@@ -4,6 +4,10 @@ import styles from "./shop.module.scss";
 import {selectAllPosts} from '../../features/Users';
 import {fetchPosts} from '../../features/Users';
 import {useSelector, useDispatch} from 'react-redux'
+import {  Link,  useParams,
+  useLocation,
+  useHistory,
+  useRouteMatch, } from "react-router-dom";
 
 function Shop(props) {
   const dispatch = useDispatch()
@@ -83,14 +87,18 @@ function Shop(props) {
 
 
                 return(
+                  <Link to={`/product/${id}`}>
+
                     <div className={styles['card']} key={id}>
-                      <h2 className={`${styles["card__title"]} ${styles['gold']}`}>{title}</h2>
+                      <h2 className={`${styles["card__title"]} ${styles['gold']}`}>{title.substring(0,20)}</h2>
                       <img src={image}></img>
-                      <p>$ {price} </p>
-                      <p>{description}</p>
+                      <p className={styles['card__price']}>$ {price} </p>
+                      {/* <p>{description.substring(0,30)}</p> */}
                       <p>{category}</p>
 
                     </div>
+                    </Link>
+
                 )
             })}
         </div>

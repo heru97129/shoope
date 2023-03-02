@@ -1,0 +1,70 @@
+.contact {
+    margin: 10em 0;
+  &__title {
+    text-align: center;
+    h1{
+        margin-bottom: 1em;
+    }
+  }
+  &__inpt {
+    width: 70%;
+    margin: 0 auto;
+    padding: 4em 0;
+
+    .grid {
+      display: grid;
+      gap: 5em;
+      grid-template-columns: repeat(2, 1fr);
+      div {
+        label {
+          width: 100%;
+          input {
+            &:focus{
+                outline: none;
+            }
+            &::placeholder{
+                font-size: 1.3em;
+                color: black;
+            }
+            width: 100%;
+            padding: 1em;
+            border: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.204);
+          }
+        }
+      }
+    }
+
+    .message{
+      margin-top: 4em;
+      p{
+        margin-left: 1em;
+      }
+
+      input {
+        outline: none;
+
+        width: 100%;
+        padding: 1em;
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.204);
+        &:focus{
+            outline: none;
+        }
+      }
+    }
+  }
+
+  &__btn{
+    margin: 0 auto;
+    width: 40%;
+    button{
+        padding: 1em 0 ;
+        width: 100%;
+        background-color: black;
+        color: white;
+        font-size: 1.2em;
+        
+    }
+  }
+}

@@ -25,6 +25,10 @@
   font-size: 1.3em;
   margin-right: 2em;
 }
+.footer__terms .terms-link ul li a {
+  text-decoration: none;
+  color: black;
+}
 .footer__terms .terms-newsletter input {
   background: url(../../../public/images/arrow.png) no-repeat scroll 100% 15px;
   border-right: none;

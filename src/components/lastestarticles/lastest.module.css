@@ -1,5 +1,5 @@
 .lastest {
-  margin: 3em 0 10em 0;
+  margin: 3em 0 0em 0;
   width: 100%;
 }
 .lastest__title {
@@ -23,7 +23,11 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 5em;
+  gap: 1em 5em;
+}
+.lastest__grid a {
+  text-decoration: none;
+  color: black;
 }
 .lastest__grid p {
   margin: 0.5em 0;
@@ -36,8 +40,13 @@
   margin-bottom: 1em;
 }
 .lastest__grid .card img {
-  width: 100%;
+  width: 70%;
   height: 400px;
+  padding: 0 3em;
+}
+.lastest__grid .card__price {
+  font-weight: 600;
+  color: rgb(227, 194, 5);
 }
 
 .gold {

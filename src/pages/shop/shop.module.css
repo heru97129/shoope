@@ -1,9 +1,10 @@
 .shop {
-  margin: 5em 0EM 8em 0;
+  margin: 5em 0em 8em 0;
 }
 .shop .shopstore {
   padding: 2em 0;
   display: flex;
+  gap: 0 3em;
 }
 .shop .shopstore__search {
   padding: 0em 1em;
@@ -57,21 +58,25 @@
   display: flex;
   justify-content: space-between;
 }
-.shop .shopstore__search .on-sale, .shop .shopstore__search .in-stock {
+.shop .shopstore__search .on-sale,
+.shop .shopstore__search .in-stock {
   margin: 1em 0;
   display: flex;
   justify-content: space-between;
 }
-.shop .shopstore__search .on-sale .switch, .shop .shopstore__search .in-stock .switch {
+.shop .shopstore__search .on-sale .switch,
+.shop .shopstore__search .in-stock .switch {
   display: inline-block;
   height: 24px;
   position: relative;
   width: 50px;
 }
-.shop .shopstore__search .on-sale .switch input, .shop .shopstore__search .in-stock .switch input {
+.shop .shopstore__search .on-sale .switch input,
+.shop .shopstore__search .in-stock .switch input {
   display: none;
 }
-.shop .shopstore__search .on-sale .slider, .shop .shopstore__search .in-stock .slider {
+.shop .shopstore__search .on-sale .slider,
+.shop .shopstore__search .in-stock .slider {
   background-color: #313131;
   bottom: 0;
   cursor: pointer;
@@ -81,7 +86,8 @@
   top: 0;
   transition: 0.4s;
 }
-.shop .shopstore__search .on-sale .slider:before, .shop .shopstore__search .in-stock .slider:before {
+.shop .shopstore__search .on-sale .slider:before,
+.shop .shopstore__search .in-stock .slider:before {
   background-color: #fff;
   bottom: 4px;
   content: "";
@@ -91,16 +97,20 @@
   transition: 0.4s;
   width: 16px;
 }
-.shop .shopstore__search .on-sale input:checked + .slider, .shop .shopstore__search .in-stock input:checked + .slider {
+.shop .shopstore__search .on-sale input:checked + .slider,
+.shop .shopstore__search .in-stock input:checked + .slider {
   background-color: #cecece;
 }
-.shop .shopstore__search .on-sale input:checked + .slider:before, .shop .shopstore__search .in-stock input:checked + .slider:before {
+.shop .shopstore__search .on-sale input:checked + .slider:before,
+.shop .shopstore__search .in-stock input:checked + .slider:before {
   transform: translateX(26px);
 }
-.shop .shopstore__search .on-sale .slider.round, .shop .shopstore__search .in-stock .slider.round {
+.shop .shopstore__search .on-sale .slider.round,
+.shop .shopstore__search .in-stock .slider.round {
   border-radius: 34px;
 }
-.shop .shopstore__search .on-sale .slider.round:before, .shop .shopstore__search .in-stock .slider.round:before {
+.shop .shopstore__search .on-sale .slider.round:before,
+.shop .shopstore__search .in-stock .slider.round:before {
   border-radius: 50%;
 }
 .shop .shopstore__articles {
@@ -110,8 +120,12 @@
 .shop .shopstore__articles .grid {
   padding: 0em 2em;
   display: grid;
-  gap: 3em;
+  gap: 4em 6em;
   grid-template-columns: repeat(3, 1fr);
+}
+.shop .shopstore__articles .grid a {
+  text-decoration: none;
+  color: black;
 }
 .shop .shopstore__articles .grid .card {
   width: 100%;
@@ -123,4 +137,11 @@
 .shop .shopstore__articles .grid .card img {
   width: 100%;
   height: 300px;
+}
+.shop .shopstore__articles .grid .card p {
+  margin: 0.5em 0;
+}
+.shop .shopstore__articles .grid .card__price {
+  color: rgb(227, 194, 5);
+  font-weight: 600;
 }/*# sourceMappingURL=shop.module.css.map */

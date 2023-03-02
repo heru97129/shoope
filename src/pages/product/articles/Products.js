@@ -24,6 +24,7 @@ function Products(props) {
   let [categories, setcategories] = useState();
   let [items, setitems] = useState(1);
   let [wantedItms, setwanted] = useState(0);
+  let [newpost, setnewpost] = useState();
 
 
   function ItemsSwitch(num) {
@@ -51,7 +52,7 @@ function Products(props) {
 
   useEffect(() => {
     dispatch(fetchPosts("fulfilled"));
-
+console.log(Number(router.pathname.substring(9)),'yoooooooo')
     if (post.length > 0) {
       let catego;
       let copy = post.filter((product) => {
@@ -69,7 +70,7 @@ function Products(props) {
       setcategories(copyCategories);
       setdata(copy);
     }
-  }, [post.length > 0]);
+  }, [post.length > 0,router.pathname]);
 
   console.log(data);
   console.log(categories);

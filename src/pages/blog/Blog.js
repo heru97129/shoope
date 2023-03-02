@@ -83,7 +83,7 @@ function Blog(props) {
                                         <img src={image}></img>
                                         <p>$ {price}
                                         </p>
-                                        <p>{description}</p>
+                                        {/* <p>{description}</p> */}
                                         <p>{category}</p>
 
                                     </div>

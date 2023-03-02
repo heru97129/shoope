@@ -13,6 +13,7 @@ import Layout from "./components/layout/Layout";
 import Account from "./pages/account/Account";
 import postsReducer from './features/Users';
 import Products from "./pages/product/articles/Products";
+import Contact from "./pages/contact/Contact";
 
 const store = configureStore({
   reducer: {
@@ -31,6 +32,7 @@ root.render(
       <Route path="OurStory" element={<OurStory />} />
       <Route path="account"   element={<Account />}/>
       <Route path="/product/:1"   element={<Products />}/>
+      <Route path="contact"   element={<Contact />}/>
 
     </Routes>
   </BrowserRouter>
