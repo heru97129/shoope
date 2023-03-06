@@ -15,9 +15,9 @@ export function Similar({ articles }) {
         articles.map((product) => {
           let { category, description, id, image, price, title } = product;
           return (
-            <Link to={`/product/${id}`}>
+            <Link to={`/product/${id}`}  key={id}>
 
-            <div className={styles["card"]} key={id}>
+            <div className={styles["card"]}>
               <img src={image} />
               <p>
                 <strong>{title}</strong>{" "}

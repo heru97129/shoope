@@ -10,10 +10,20 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState: {
     data: [],
+    count:0,
+    order:[],
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    order:(state,action)=>{
+    state.count = action.payload
+      console.log(state.count)
+    },
+    neworder:(state,action)=>{
+        state.order = [...state.order,{order:action.payload}]
+    }
+  },
   extraReducers: {
     [fetchPosts.pending]: (state) => {
       state.status = 'loading';
@@ -30,5 +40,6 @@ const postsSlice = createSlice({
 });
 
 export const selectAllPosts = (state) => state.posts.data;
+export const {order,neworder} = postsSlice.actions;
 
 export default postsSlice.reducer;

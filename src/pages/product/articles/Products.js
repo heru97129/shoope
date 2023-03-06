@@ -3,8 +3,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import styles from "./product.module.scss";
 import Layout from "../../../components/layout/Layout";
-import { useSelector, useDispatch } from "react-redux";
-import { selectAllPosts } from "../../../features/Users";
+import { useSelector, useDispatch,dispatch } from "react-redux";
+import { order, selectAllPosts,neworder } from "../../../features/Users";
 import { fetchPosts } from "../../../features/Users";
 import {
   Link,
@@ -36,13 +36,13 @@ function Products(props) {
    let sign = e.target.innerText
 
    if(sign === '+'){
-    console.log('plus')
     setwanted(wantedItms + 1)
+    dispatch(neworder(data))
    }
    
    else if(sign === '-' && wantedItms !== 0){
-    console.log('minus')
     setwanted(wantedItms - 1)
+  
 
    }
    console.log(wantedItms)
@@ -51,18 +51,18 @@ function Products(props) {
 
 
   useEffect(() => {
+dispatch(order(wantedItms))
     dispatch(fetchPosts("fulfilled"));
-console.log(Number(router.pathname.substring(9)),'yoooooooo')
     if (post.length > 0) {
       let catego;
       let copy = post.filter((product) => {
         if (product.id === Number(router.pathname.substring(9))) {
           catego = product.category;
+     
         }
 
         return product.id === Number(router.pathname.substring(9));
       });
-
       let copyCategories = post.filter(
         (product) => product.category === catego
       );
@@ -70,10 +70,8 @@ console.log(Number(router.pathname.substring(9)),'yoooooooo')
       setcategories(copyCategories);
       setdata(copy);
     }
-  }, [post.length > 0,router.pathname]);
+  }, [post.length > 0,router.pathname,wantedItms]);
 
-  console.log(data);
-  console.log(categories);
 
   return (
     <Layout>

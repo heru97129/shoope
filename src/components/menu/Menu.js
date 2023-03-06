@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from './menu.module.scss'
 import {  Link,  useParams,
   useLocation,
   useHistory,
-  useRouteMatch, } from "react-router-dom";
+  useRouteMatch} from "react-router-dom";
+  import { useSelector, useDispatch,dispatch, createStoreHook } from "react-redux";
+
 
 export function Menu({}) {
   const router = useLocation()
-  console.log(router.pathname)
+   const ordero = useSelector(state => state.posts.count)
+   console.log(ordero)
   return (
 <div className={styles['menu']}>
        <div className={styles['menu__slogan']}>
@@ -26,7 +29,7 @@ export function Menu({}) {
         <div className={styles['menu-right__icons']}>
           <ul>
             <li>  <i className="fa-solid fa-magnifying-glass"></i></li>
-            <li><i className="fa-solid fa-cart-shopping"></i></li>
+            <li className={styles['shop']}><i className="fa-solid fa-cart-shopping"></i> <span className={styles['ordered']}>{ordero}</span></li>
             <li><Link to="/account"><i className="fa-solid fa-user"></i></Link></li>
           </ul>
         </div>

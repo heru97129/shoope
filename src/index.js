@@ -14,12 +14,16 @@ import Account from "./pages/account/Account";
 import postsReducer from './features/Users';
 import Products from "./pages/product/articles/Products";
 import Contact from "./pages/contact/Contact";
+import { order } from "./features/Users";
 
 const store = configureStore({
   reducer: {
     posts: postsReducer,
-  }
+ 
+  },
+ 
 });
+console.log(store.getState())
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(

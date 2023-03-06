@@ -5,10 +5,13 @@ import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import styles from "./account.module.scss";
 import Download from "../../components/download/Download";
+import { useSelector, useDispatch,dispatch, createStoreHook } from "react-redux";
+
 
 function Account(props) {
   let [select, setselect] = useState(0);
-
+   const neworder = useSelector(state => state.posts.order)
+   console.log(neworder)
   function switchTab(page) {
     setselect(page);
   }
