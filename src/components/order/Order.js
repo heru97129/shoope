@@ -1,14 +1,51 @@
 import React from "react";
 import styles from './order.module.scss'
+import { useSelector, useDispatch,dispatch, createStoreHook } from "react-redux";
 
 
 export function Order({}) {
+
+  const neworder = useSelector(state => state.posts.order)
+  neworder.map(data=>{
+    const {price} = data.order[0]
+    console.log(price)
+  })
   return (
     <div className={styles['order']}>
-    <div className={styles['order__notyet']}>
+    {neworder.length == 0 &&  <div className={styles['order__notyet']}>
       <p>No order has been made yet</p>
       <p>BROWNSE PRODUCT</p>
-    </div>
+    </div>}
+    {neworder.length > 0 &&  <div className={styles['order__yet']}>
+    <table>
+    <thead>
+     
+    </thead>
+    <tbody>
+      <tr>
+        <th className={styles['items']}>ORDER NUMBER</th>
+        <th className={styles['items']}>DATE</th>
+        <th className={styles['items']}>STATUS</th>
+        <th className={styles['items']}>TOTAL</th>
+        <th className={styles['items']}>ACTIONS</th>
+      </tr>
+      {neworder.map(data =>{
+        console.log(data.order[0],'order')
+             const {category,id,price} = data.order[0]
+        return(
+          <tr key={id}>
+            <td>{id}</td>
+            <td>{new Date().toLocaleDateString()}</td>
+            <td>Processing</td>
+            <td>$ {price}</td>
+            <td>view order</td>
+          </tr>
+        )
+      })}
+  
+    </tbody>
+  </table>
+    </div>}
     </div>
   );
 }

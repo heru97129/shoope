@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { act } from 'react-dom/test-utils';
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
@@ -21,7 +22,9 @@ const postsSlice = createSlice({
       console.log(state.count)
     },
     neworder:(state,action)=>{
+     
         state.order = [...state.order,{order:action.payload}]
+      
     }
   },
   extraReducers: {
