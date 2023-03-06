@@ -10,7 +10,7 @@ import {  Link,  useParams,
 export function Menu({}) {
   const router = useLocation()
    const ordero = useSelector(state => state.posts.count)
-   console.log(ordero)
+
   return (
 <div className={styles['menu']}>
        <div className={styles['menu__slogan']}>

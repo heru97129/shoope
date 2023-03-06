@@ -19,13 +19,43 @@ const postsSlice = createSlice({
   reducers: {
     order:(state,action)=>{
     state.count = action.payload
-      console.log(state.count)
     },
     neworder:(state,action)=>{
-     
-        state.order = [...state.order,{order:action.payload}]
+     let data = []
+
+        state.order = [...state.order,...action.payload]
+      data = [...state.order]
+ let compte = {}
+        let pricesById = {};
+        let compteid = 0
+        for (const item of data) {
+          const { id, price } = item;
+          if (!pricesById[id]) {
+            compteid = 0
+            console.log(pricesById[id], "price");
       
-    }
+            pricesById[id] = price;
+            console.log(pricesById[id], "price");
+      
+          } else {
+           
+            pricesById[id] += price;
+             compteid++
+           
+          }
+      
+        }
+        const summedItems = Object.keys(pricesById).map((id) => ({
+          id,
+          price: pricesById[id],
+           compte : compte[id]
+        }));
+     
+        state.order = [ ...summedItems]
+        console.log(state.order)
+      }
+      
+    
   },
   extraReducers: {
     [fetchPosts.pending]: (state) => {

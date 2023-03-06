@@ -6,10 +6,7 @@ import { useSelector, useDispatch,dispatch, createStoreHook } from "react-redux"
 export function Order({}) {
 
   const neworder = useSelector(state => state.posts.order)
-  neworder.map(data=>{
-    const {price} = data.order[0]
-    console.log(price)
-  })
+console.log(neworder)
   return (
     <div className={styles['order']}>
     {neworder.length == 0 &&  <div className={styles['order__notyet']}>
@@ -30,8 +27,8 @@ export function Order({}) {
         <th className={styles['items']}>ACTIONS</th>
       </tr>
       {neworder.map(data =>{
-        console.log(data.order[0],'order')
-             const {category,id,price} = data.order[0]
+        console.log(data,'order')
+             const {category,id,price} = data
         return(
           <tr key={id}>
             <td>{id}</td>

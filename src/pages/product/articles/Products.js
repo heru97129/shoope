@@ -17,6 +17,7 @@ import AddInformations from "../../../components/AddInformations/AddInformations
 import Review from "../../../components/review/Review";
 
 function Products(props) {
+  
   const dispatch = useDispatch();
   const post = useSelector(selectAllPosts);
   const router = useLocation();
@@ -64,11 +65,15 @@ dispatch(order(wantedItms))
         return product.id === Number(router.pathname.substring(9));
       });
       let copyCategories = post.filter(
+
         (product) => product.category === catego
+        
       );
       copyCategories = copyCategories.slice(0, 3);
+      
       setcategories(copyCategories);
       setdata(copy);
+    
     }
   }, [post.length > 0,router.pathname,wantedItms]);
 
