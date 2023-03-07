@@ -1,0 +1,45 @@
+@import "../../../public/styles/color.module.scss";
+
+
+
+.shopcard{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 454;
+    background-color: rgb(255, 255, 255);
+    width: 20%;
+    padding: 1em;
+
+    &__bag{
+        margin-top: 3em;
+        .product{
+            .card{
+                display: flex;
+                height: 200px;
+                margin: 2em 0;
+                gap: 0 1EM;
+                &__pic{
+                 width: 100%;
+                 height: 100%;
+                 img{
+                    width: 100%;
+                    height: 100%;
+                 }
+                }
+                &__details{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                  .details{
+                    &__price{
+                        color: $yelow ;
+                    }
+                  }
+                }
+            }
+        }
+    }
+}

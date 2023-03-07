@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './menu.module.scss'
 import {  Link,  useParams,
   useLocation,
   useHistory,
   useRouteMatch} from "react-router-dom";
   import { useSelector, useDispatch,dispatch, createStoreHook } from "react-redux";
+import Shopcard from "../../pages/shopcard/Shopcard";
 
 
 export function Menu({}) {
   const router = useLocation()
    const ordero = useSelector(state => state.posts.count)
+   let [showcard,setshow] = useState(false)
+   function Showcard(){
+    setshow(el => !el)
+    console.log(showcard)
+   }
 
   return (
 <div className={styles['menu']}>
@@ -29,12 +35,14 @@ export function Menu({}) {
         <div className={styles['menu-right__icons']}>
           <ul>
             <li>  <i className="fa-solid fa-magnifying-glass"></i></li>
-            <li className={styles['shop']}><i className="fa-solid fa-cart-shopping"></i> <span className={styles['ordered']}>{ordero}</span></li>
+            <li onClick={Showcard} className={styles['shop']}><i className="fa-solid fa-cart-shopping"></i> <span className={styles['ordered']}>{ordero}</span></li>
             <li><Link to="/account"><i className="fa-solid fa-user"></i></Link></li>
           </ul>
         </div>
 
        </div>
+       {showcard &&   <Shopcard />}
+     
       </div>
       )
 }

@@ -87,9 +87,9 @@ function Shop(props) {
 
 
                 return(
-                  <Link to={`/product/${id}`}>
+                  <Link to={`/product/${id}`} key={id}>
 
-                    <div className={styles['card']} key={id}>
+                    <div className={styles['card']} >
                       <h2 className={`${styles["card__title"]} ${styles['gold']}`}>{title.substring(0,20)}</h2>
                       <img src={image}></img>
                       <p className={styles['card__price']}>$ {price} </p>

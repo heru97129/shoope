@@ -28,10 +28,10 @@ console.log(neworder)
       </tr>
       {neworder.map(data =>{
         console.log(data,'order')
-             const {category,id,price} = data
+             const {compte,id,price} = data
         return(
           <tr key={id}>
-            <td>{id}</td>
+            <td>{compte}</td>
             <td>{new Date().toLocaleDateString()}</td>
             <td>Processing</td>
             <td>$ {price}</td>

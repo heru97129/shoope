@@ -22,35 +22,41 @@ const postsSlice = createSlice({
     },
     neworder:(state,action)=>{
      let data = []
-
+  let final =[]
         state.order = [...state.order,...action.payload]
-      data = [...state.order]
- let compte = {}
+        data = [...state.order]
         let pricesById = {};
-        let compteid = 0
+        let compteById = {};
+        let imageeById = {};
+
+       
         for (const item of data) {
-          const { id, price } = item;
+          const { id, price,image} = item;
           if (!pricesById[id]) {
-            compteid = 0
+    
             console.log(pricesById[id], "price");
-      
+             
             pricesById[id] = price;
+            compteById[id] = pricesById[id] / price
+            imageeById[id] = image
             console.log(pricesById[id], "price");
       
           } else {
            
             pricesById[id] += price;
-             compteid++
+            compteById[id] = pricesById[id] / price
            
           }
       
         }
+
         const summedItems = Object.keys(pricesById).map((id) => ({
           id,
           price: pricesById[id],
-           compte : compte[id]
+           compte : compteById[id],
+           image: imageeById[id]
         }));
-     
+        
         state.order = [ ...summedItems]
         console.log(state.order)
       }

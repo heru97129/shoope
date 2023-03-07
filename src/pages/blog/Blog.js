@@ -77,8 +77,8 @@ function Blog(props) {
                                 } = articles
 
                                 return (
-                                    <Link to={`/product/${id}`}>
-                                    <div className={styles['card']} key={id} >
+                                    <Link to={`/product/${id}`} key={id}>
+                                    <div className={styles['card']}  >
                                         <h2 className={`${styles["card__title"]} ${styles['gold']}`}>{title}</h2>
                                         <img src={image}></img>
                                         <p>$ {price}
