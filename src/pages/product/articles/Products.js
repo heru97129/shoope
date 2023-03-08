@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./product.module.scss";
 import Layout from "../../../components/layout/Layout";
 import { useSelector, useDispatch,dispatch } from "react-redux";
-import { order, selectAllPosts,neworder } from "../../../features/Users";
+import { order, selectAllPosts,neworder,addprod } from "../../../features/Users";
 import { fetchPosts } from "../../../features/Users";
 import {
   Link,
@@ -16,20 +16,28 @@ import {
 import AddInformations from "../../../components/AddInformations/AddInformations";
 import Review from "../../../components/review/Review";
 
+let tb = []
+
 function Products(props) {
   
   const dispatch = useDispatch();
   const post = useSelector(selectAllPosts);
+  const numberOrder = useSelector( state => state.posts.count)
+  const numberds = useSelector( state => state.posts.countProduct)
+
+console.log(numberds)
+
+
+
+  
   const router = useLocation();
   let [data, setdata] = useState();
   let [categories, setcategories] = useState();
   let [items, setitems] = useState(1);
-  let [wantedItms, setwanted] = useState(0);
-  let [newpost, setnewpost] = useState();
+  let [count, setcount] = useState(1);
 
 
   function ItemsSwitch(num) {
-    console.log(num, "yo");
     setitems(num)
   }
 
@@ -37,22 +45,27 @@ function Products(props) {
    let sign = e.target.innerText
 
    if(sign === '+'){
-    setwanted(wantedItms + 1)
+setcount(count + 1 )
+
+    dispatch(order('+'))
     dispatch(neworder(data))
-   }
-   
-   else if(sign === '-' && wantedItms !== 0){
-    setwanted(wantedItms - 1)
-  
+tb.push({id:data.map(st=> st.id).join(''),count:count})
+console.log(tb,'yo')
+    dispatch(addprod(tb))
 
    }
-   console.log(wantedItms)
+   
+   else if(sign === '-' ){
+    dispatch(order('-'))
+    setcount(count - 1)
+
+   }
   }
 
 
 
   useEffect(() => {
-dispatch(order(wantedItms))
+    setcount(1)
     dispatch(fetchPosts("fulfilled"));
     if (post.length > 0) {
       let catego;
@@ -61,6 +74,8 @@ dispatch(order(wantedItms))
           catego = product.category;
      
         }
+
+       
 
         return product.id === Number(router.pathname.substring(9));
       });
@@ -75,7 +90,7 @@ dispatch(order(wantedItms))
       setdata(copy);
     
     }
-  }, [post.length > 0,router.pathname,wantedItms]);
+  }, [post.length > 0,router.pathname]);
 
 
   return (
@@ -85,7 +100,7 @@ dispatch(order(wantedItms))
           {data &&
             data.map((product) => {
               let { category, description, id, image, price, title } = product;
-
+                  
               return (
                 <div className={styles["container"]} key={id}>
                   <div className={styles["product-pic"]}>
@@ -114,7 +129,7 @@ dispatch(order(wantedItms))
                           <p onClick={NumberofItems}>-</p>
                         </div>
                         <div>
-                          <p>{wantedItms}</p>
+                          <p>{0}</p>
                         </div>
                         <div>
                           <p onClick={NumberofItems}>+</p>

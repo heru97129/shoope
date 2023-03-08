@@ -1,64 +1,84 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
+let compteById = {};
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
   return response.data;
 });
-
 const postsSlice = createSlice({
   name: 'posts',
   initialState: {
     data: [],
     count:0,
+    countProduct:[],
     order:[],
     status: 'idle',
     error: null,
   },
   reducers: {
     order:(state,action)=>{
-    state.count = action.payload
+      if(action.payload === '+'){
+        state.count = state.count + 1
+
+      }
+      
+      else if (action.payload === '-' && state.count != 0){
+        state.count = state.count - 1
+
+      }
+
+    },
+    addprod:(state,action)=>{
+      //  console.log(action.payload,'count')
+       state.countProduct = [...action.payload]
+       console.log(state.countProduct,'uo')
     },
     neworder:(state,action)=>{
+   let tabcounpte = []
      let data = []
-  let final =[]
-        state.order = [...state.order,...action.payload]
-        data = [...state.order]
+        data = [...state.order,...action.payload]
         let pricesById = {};
-        let compteById = {};
         let imageeById = {};
-
-       
+  
         for (const item of data) {
+          
           const { id, price,image} = item;
-          if (!pricesById[id]) {
+          if (!pricesById[id] ) {
     
-            console.log(pricesById[id], "price");
-             
             pricesById[id] = price;
-            compteById[id] = pricesById[id] / price
+            
             imageeById[id] = image
-            console.log(pricesById[id], "price");
       
           } else {
-           
             pricesById[id] += price;
-            compteById[id] = pricesById[id] / price
+        
+         
            
           }
-      
-        }
 
+
+          state.countProduct.map(prod =>{
+            if(Number(prod.id) === id){
+              compteById.id = prod.id
+              compteById.compte = prod.count
+     
+            }
+          
+      
+        })
+      }
+         const thetab = [...tabcounpte]
         const summedItems = Object.keys(pricesById).map((id) => ({
           id,
           price: pricesById[id],
-           compte : compteById[id],
+           compte : id === compteById.id ? compteById.compte : [id,compteById.id],
            image: imageeById[id]
         }));
         
         state.order = [ ...summedItems]
-        console.log(state.order)
+        console.log(state.order,compteById)
       }
       
     
@@ -79,6 +99,6 @@ const postsSlice = createSlice({
 });
 
 export const selectAllPosts = (state) => state.posts.data;
-export const {order,neworder} = postsSlice.actions;
+export const {order,neworder,addprod} = postsSlice.actions;
 
 export default postsSlice.reducer;
