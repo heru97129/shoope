@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from 'react-modal/lib/components/Modal';
 import { useSelector } from 'react-redux';
 import styles from './shopcard.module.scss'
 

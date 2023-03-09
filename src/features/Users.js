@@ -1,4 +1,6 @@
+import { objectMethod } from '@babel/types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { prettyDOM } from '@testing-library/react';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
 let compteById = {};
@@ -32,53 +34,59 @@ const postsSlice = createSlice({
     },
     addprod:(state,action)=>{
       //  console.log(action.payload,'count')
-       state.countProduct = [...action.payload]
-       console.log(state.countProduct,'uo')
+       let data = [...action.payload]
+       let tab = []
+       let num = 0
+       data.filter((prod,i)=>{ 
+          if(Number(prod.id) === Number(action.payload[i].id)){
+             if(prod.change){
+              tab[num]= prod
+
+             }
+            tab[num]= prod
+          
+          }
+   
+ 
+        })
+       console.log(tab,'i')
+       state.countProduct = tab
     },
     neworder:(state,action)=>{
-   let tabcounpte = []
+     let tab  = []
      let data = []
         data = [...state.order,...action.payload]
         let pricesById = {};
         let imageeById = {};
-  
+        let compteById = {}
+        
         for (const item of data) {
           
           const { id, price,image} = item;
-          if (!pricesById[id] ) {
+          if (!pricesById[id]  && !compteById[id]) {
     
             pricesById[id] = price;
-            
+            compteById[id] = 1
             imageeById[id] = image
-      
+          
           } else {
             pricesById[id] += price;
         
-         
-           
           }
 
-
-          state.countProduct.map(prod =>{
-            if(Number(prod.id) === id){
-              compteById.id = prod.id
-              compteById.compte = prod.count
-     
-            }
-          
+    
       
-        })
       }
-         const thetab = [...tabcounpte]
+       
         const summedItems = Object.keys(pricesById).map((id) => ({
           id,
           price: pricesById[id],
-           compte : id === compteById.id ? compteById.compte : [id,compteById.id],
+          count: 0 ,
            image: imageeById[id]
         }));
         
         state.order = [ ...summedItems]
-        console.log(state.order,compteById)
+        console.log(state.order,pricesById,summedItems)
       }
       
     

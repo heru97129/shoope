@@ -14,7 +14,6 @@ export function Menu({}) {
    let [showcard,setshow] = useState(false)
    function Showcard(){
     setshow(el => !el)
-    console.log(showcard)
    }
 
   return (

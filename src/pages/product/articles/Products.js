@@ -25,16 +25,13 @@ function Products(props) {
   const numberOrder = useSelector( state => state.posts.count)
   const numberds = useSelector( state => state.posts.countProduct)
 
-console.log(numberds)
-
-
-
   
   const router = useLocation();
   let [data, setdata] = useState();
   let [categories, setcategories] = useState();
   let [items, setitems] = useState(1);
   let [count, setcount] = useState(1);
+  let [update, setupdate] = useState(false);
 
 
   function ItemsSwitch(num) {
@@ -49,10 +46,10 @@ setcount(count + 1 )
 
     dispatch(order('+'))
     dispatch(neworder(data))
-tb.push({id:data.map(st=> st.id).join(''),count:count})
-console.log(tb,'yo')
-    dispatch(addprod(tb))
+tb.push({id:data.map(st=> st.id).join(''),count:count,change:update})
 
+    dispatch(addprod(tb))
+setupdate(false)
    }
    
    else if(sign === '-' ){
@@ -66,6 +63,7 @@ console.log(tb,'yo')
 
   useEffect(() => {
     setcount(1)
+    setupdate(true)
     dispatch(fetchPosts("fulfilled"));
     if (post.length > 0) {
       let catego;
