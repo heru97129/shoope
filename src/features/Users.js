@@ -4,7 +4,9 @@ import { prettyDOM } from '@testing-library/react';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
 let compteById = {};
-
+let tab = []
+let check ={}
+let compte = 0
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
   return response.data;
@@ -53,43 +55,48 @@ const postsSlice = createSlice({
        state.countProduct = tab
     },
     neworder:(state,action)=>{
-     let tab  = []
-     let data = []
-        data = [...state.order,...action.payload]
-        let pricesById = {};
-        let imageeById = {};
-        let compteById = {}
-        
-        for (const item of data) {
-          
-          const { id, price,image} = item;
-          if (!pricesById[id]  && !compteById[id]) {
-    
-            pricesById[id] = price;
-            compteById[id] = 1
-            imageeById[id] = image
-          
-          } else {
-            pricesById[id] += price;
-        
-          }
+          state.order.forEach(et =>{
+            console.log(et,'stae order')
+          })
+       let data = action.payload
+             
+          let newData = {...data[0]}
+     if(!check[data[0].id]){
+      compte = 1
+          check[data[0].id] = 'test'
+          console.log(check,newData,'newdata')
+          newData.compte = compte
+          tab.push(newData)
 
-    
-      
-      }
        
-        const summedItems = Object.keys(pricesById).map((id) => ({
-          id,
-          price: pricesById[id],
-          count: 0 ,
-           image: imageeById[id]
-        }));
-        
-        state.order = [ ...summedItems]
-        console.log(state.order,pricesById,summedItems)
-      }
-      
+        }else{
+
+          let newItem = {}
+            tab.forEach((item,i)=>{
+              let {id } = item
+              newItem = {...item}
+              if(id === data[0].id){
+         
+               compte += 1
+              console.log('yoooooooo',compte)
     
+                newItem.compte = compte
+                console.log(newItem)
+                tab.slice(i,1)
+                tab[i] = newItem
+              }
+            })
+
+
+        }
+
+console.log(tab)
+        
+      state.order = [...tab]
+      }
+        
+     
+        
   },
   extraReducers: {
     [fetchPosts.pending]: (state) => {

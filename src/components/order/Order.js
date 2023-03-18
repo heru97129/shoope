@@ -34,7 +34,7 @@ console.log(neworder)
             <td>{compte}</td>
             <td>{new Date().toLocaleDateString()}</td>
             <td>Processing</td>
-            <td>$ {price}</td>
+            <td>$ {price * compte}</td>
             <td>view order</td>
           </tr>
         )
