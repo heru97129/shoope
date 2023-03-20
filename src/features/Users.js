@@ -55,7 +55,7 @@ const postsSlice = createSlice({
        state.countProduct = tab
     },
     neworder:(state,action)=>{
-          
+   
        let data = action.payload
              
           let newData = {...data[0]}

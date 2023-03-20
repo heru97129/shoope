@@ -30,6 +30,8 @@ function Products(props) {
   let [items, setitems] = useState(1);
   let [count, setcount] = useState(1);
   let [update, setupdate] = useState(false);
+  let [nombre, setnombre] = useState(0);
+  let [newdata, setnewdata] = useState();
 
 
   function ItemsSwitch(num) {
@@ -83,24 +85,32 @@ setupdate(false)
       copyCategories = copyCategories.slice(0, 3);
       
       setcategories(copyCategories);
-      setdata(copy);
+     setdata(copy)
+     setnewdata(copy)
     
     }
-  }, [post.length > 0,router.pathname]);
+   
+  }, [post.length > 0,router.pathname,newShit.length > 0]);
+  console.log(newdata,'new')
+
+  function Compteproduct(){
 
 
+    if(newShit.length > 0){
+     let compte = newShit.find(news => news.id === data[0].id)
+     let numberprod = compte.compte
+     console.log(numberprod,compte,'number')
+     setnombre( numberprod + 1)
+    }
+  }
   return (
     <Layout>
       <div className={styles["prod"]}>
         <div className={styles["prod__describ"]}>
-          {data &&
-            data.map((product) => {
-              let updateproduct = {}
-              let { category, description, id, image, price, title } = product;
-              if(newShit.length > 0){
-                 updateproduct = newShit.find(order => order.id === id)
-                console.log(updateproduct.id) 
-              }
+          {newdata &&
+            newdata.map((product) => {
+              let { category, description, id, image, price, title,compte } = product;
+         
               
               return (
                 <div className={styles["container"]} key={id}>
@@ -130,10 +140,14 @@ setupdate(false)
                           <p onClick={NumberofItems}>-</p>
                         </div>
                         <div>
-                          <p>{updateproduct &&  updateproduct.id}</p>
+                          <p>{nombre}</p>
                         </div>
                         <div>
-                          <p onClick={NumberofItems}>+</p>
+                          <p onClick={(e)=>{ 
+                          NumberofItems(e)
+                           Compteproduct()
+                          }
+                          }>+</p>
                         </div>
                       </div>
 
