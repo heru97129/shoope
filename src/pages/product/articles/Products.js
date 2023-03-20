@@ -22,9 +22,7 @@ function Products(props) {
   
   const dispatch = useDispatch();
   const post = useSelector(selectAllPosts);
-  const numberOrder = useSelector( state => state.posts.count)
-  const numberds = useSelector( state => state.posts.countProduct)
-
+  let newShit = useSelector(state => state.posts.order)
   
   const router = useLocation();
   let [data, setdata] = useState();
@@ -97,8 +95,13 @@ setupdate(false)
         <div className={styles["prod__describ"]}>
           {data &&
             data.map((product) => {
+              let updateproduct = {}
               let { category, description, id, image, price, title } = product;
-                  
+              if(newShit.length > 0){
+                 updateproduct = newShit.find(order => order.id === id)
+                console.log(updateproduct.id) 
+              }
+              
               return (
                 <div className={styles["container"]} key={id}>
                   <div className={styles["product-pic"]}>
@@ -127,7 +130,7 @@ setupdate(false)
                           <p onClick={NumberofItems}>-</p>
                         </div>
                         <div>
-                          <p>{0}</p>
+                          <p>{updateproduct &&  updateproduct.id}</p>
                         </div>
                         <div>
                           <p onClick={NumberofItems}>+</p>

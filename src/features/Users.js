@@ -55,9 +55,7 @@ const postsSlice = createSlice({
        state.countProduct = tab
     },
     neworder:(state,action)=>{
-          state.order.forEach(et =>{
-            console.log(et,'stae order')
-          })
+          
        let data = action.payload
              
           let newData = {...data[0]}
@@ -77,10 +75,10 @@ const postsSlice = createSlice({
               newItem = {...item}
               if(id === data[0].id){
          
-               compte += 1
+          
               console.log('yoooooooo',compte)
     
-                newItem.compte = compte
+                newItem.compte += 1
                 console.log(newItem)
                 tab.slice(i,1)
                 tab[i] = newItem

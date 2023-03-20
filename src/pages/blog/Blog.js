@@ -80,7 +80,9 @@ function Blog(props) {
                                     <Link to={`/product/${id}`} key={id}>
                                     <div className={styles['card']}  >
                                         <h2 className={`${styles["card__title"]} ${styles['gold']}`}>{title}</h2>
+                                        <div className={styles['div-pic']}>
                                         <img src={image}></img>
+                                        </div>
                                         <p>$ {price}
                                         </p>
                                         {/* <p>{description}</p> */}

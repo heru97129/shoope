@@ -1,77 +1,81 @@
-.container{
-    margin: 4em 0 8em 0;
-    h1{
-        margin: 1em  0 1em .5em;
+.container {
+    margin: 4em 0 8em;
+    h1 {
+        margin: 1em 0 1em 0.5em;
     }
-    a{
+    a {
         text-decoration: none;
         color: black;
     }
-    .blog{
+    .blog {
         display: flex;
-        &__search{
-         width: 25%;
-         display: flex;
-         flex-direction: column;
-         padding:0  1em ;
-    
-         input{
-            background: url(../../../public/images/Iconcolor.png) no-repeat scroll 100% 7px;
-    
-            width: 100%;
-            padding: 1em 0;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            &::placeholder{
-                font-size: 1.4em;
-                font-weight: 600;
+        &__search {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 1em;
+
+            input {
+                background: url("../../../public/images/Iconcolor.png") no-repeat scroll 100% 7px;
+
+                width: 100%;
+                padding: 1em 0;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                &::placeholder {
+                    font-size: 1.4em;
+                    font-weight: 600;
+                }
+                &:focus {
+                    outline: none;
+                }
+                margin-bottom: 3em;
             }
-            &:focus{
-                outline: none;
-            }
-            margin-bottom: 3em;
-        }
-    
-        .categories{
-    
-            ul{
-                list-style: none;
-                li{
-                    margin: 1em 0;
-                    cursor: pointer;
+
+            .categories {
+
+                ul {
+                    list-style: none;
+                    li {
+                        margin: 1em 0;
+                        cursor: pointer;
+                    }
                 }
             }
+
         }
-    
-        }
-    
-        &__articles{
+
+        &__articles {
             width: 75%;
-            .grid{
-                padding: 0em 2em;
+            .grid {
+                padding: 0 2em;
                 display: grid;
                 gap: 3em;
                 grid-template-columns: repeat(2,1fr);
-               .card{
-                width: 100%;
-                h2{
-                  font-size: 1.2em;
-                   margin-bottom: 1.5em;
-                }
-                img{
-                    width: 70%;
-                    height:300px;
-                    margin: 0 3em;
-                   
-                }
-                p{
-                    margin: 1em ;
-                    &::nth-child(1){
-                        font-weight: 600;
+                .card {
+                    width: 100%;
+                    h2 {
+                        font-size: 1.2em;
+                        margin-bottom: 1.5em;
+                    }
+                    .div-pic{
+                        width: 100%;
+                        height: 250px;
+                    }
+                    img {
+                        width: 70%;
+                        height: 100%;
+                        margin: 0 3em;
+
+                    }
+                    p {
+                        margin: 1em;
+                        &::nth-child(1) {
+                            font-weight: 600;
+                        }
                     }
                 }
-               } 
             }
         }
     }
