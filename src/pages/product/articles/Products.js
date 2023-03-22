@@ -92,8 +92,7 @@ function Products(props) {
             setnewdata(copy)
             if(data){
               tb =  [...tb,{id:copy[0].id.toString(),count:count,update:update}]
-              newShit = []
-              console.log(newShit,'new article')
+           
             }
          
         }

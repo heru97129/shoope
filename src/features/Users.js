@@ -85,6 +85,10 @@ const postsSlice = createSlice({
             }
 
             state.order = [...tab]
+        },
+
+        minus : (state,action) =>{
+          
         }
 
     },
