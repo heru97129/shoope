@@ -88,7 +88,24 @@ const postsSlice = createSlice({
         },
 
         minus : (state,action) =>{
-          
+           console.log(action.payload,'payload')
+           let data = action.payload
+           
+           let obj = {...data.at(-1)}
+           let newdata = {...tab.at(-1)}
+            
+           console.log(obj,check,tab,newdata)
+
+        //    tab.forEach(el => {
+        //     if(Number(el.id) === Number(obj.id)){
+        //       console.log('right data')
+        //       el.compte = obj.count
+        //       console.log(el)
+        //     }
+        //    })
+        newdata.compte = obj.count
+        tab.push(newdata)
+         state.order = [...tab]
         }
 
     },
@@ -111,7 +128,8 @@ export const selectAllPosts = (state) => state.posts.data;
 export const {
     order,
     neworder,
-    addprod
+    addprod,
+    minus
 } = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import styles from "./product.module.scss";
 import Layout from "../../../components/layout/Layout";
 import {useSelector, useDispatch, dispatch} from "react-redux";
-import {order, selectAllPosts, neworder, addprod} from "../../../features/Users";
+import {order, selectAllPosts, neworder, addprod,minus} from "../../../features/Users";
 import {fetchPosts} from "../../../features/Users";
 import {Link, useParams, useLocation, useHistory, useRouteMatch} from "react-router-dom";
 import AddInformations from "../../../components/AddInformations/AddInformations";
@@ -17,7 +17,7 @@ function Products(props) {
     const dispatch = useDispatch();
     const post = useSelector(selectAllPosts);
     let newShit = useSelector(state => state.posts.order)
-
+console.log(newShit)
     const router = useLocation();
     let [data,
         setdata] = useState();
@@ -59,10 +59,20 @@ function Products(props) {
             dispatch(addprod(tb))
             setupdate(false)
             
-            console.log('TB DANS PLUS',tb,data,'data',newShit,'Ns')
+            // console.log('TB DANS PLUS',tb,data,'data',newShit,'Ns')
         } else if (sign === '-') {
             dispatch(order('-'))
             setcount(count - 1)
+            tb.push({
+                id: data
+                    .map(st => st.id)
+                    .join(''),
+                count: count,
+                change: update
+            })
+
+            
+            dispatch(minus(tb))
 
         }
     }
@@ -80,13 +90,13 @@ function Products(props) {
 
                 }
 
-                setnombre(0)
+                // console.log(newShit,'newshit')
 
                 return product.id === Number(router.pathname.substring(9));
             });
             let copyCategories = post.filter((product) => product.category === catego);
             copyCategories = copyCategories.slice(0, 3);
-
+             
             setcategories(copyCategories);
             setdata(copy)
             setnewdata(copy)
@@ -94,7 +104,20 @@ function Products(props) {
               tb =  [...tb,{id:copy[0].id.toString(),count:count,update:update}]
            
             }
-         
+
+
+
+          let rightproduct =  newShit.find( el => el.id === copy[0].id)
+          
+          if( rightproduct &&  rightproduct.hasOwnProperty('id')){
+              setnombre(rightproduct.compte)
+              setcount(rightproduct.compte)
+          }else{
+            setnombre(0)
+            setcount(0)
+
+          }
+
         }
 
     }, [
@@ -103,7 +126,6 @@ function Products(props) {
     ]);
 
     function Compteproduct() {
-      // console.log(newShit.length > 0, 'testoooo', newShit, data, 'id data',)
      if(nombre === 0) newShit = []
       
         if (newShit.length > 0) {
@@ -116,6 +138,21 @@ function Products(props) {
 
         }
     }
+
+    function Minusproduct() {
+        if(nombre === 0) newShit = []
+         
+           if (newShit.length > 0) {
+               let compte = newShit.find(news => news.id === data[0].id)
+               let numberprod = compte.compte
+                console.log(numberprod)
+               setnombre(numberprod - 1)
+           } else {
+               setnombre(1)
+   
+           }
+           console.log(nombre)
+       }
 
 
 
@@ -159,7 +196,7 @@ function Products(props) {
                                     <div className={styles["product-infos__btn"]}>
                                         <div className={styles["btn-add"]}>
                                             <div>
-                                                <p onClick={NumberofItems}>-</p>
+                                                <p onClick={Minusproduct}>-</p>
                                             </div>
                                             <div>
                                                 <p>{nombre}</p>
