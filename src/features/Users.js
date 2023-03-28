@@ -22,34 +22,37 @@ const postsSlice = createSlice({
         error: null
     },
     reducers: {
-        order: (state, action) => {
-            if (action.payload === '+') {
-                state.count = state.count + 1
+        counter: (state, action) => {
+            console.log(action.payload)
+        
+            if(!check[action.payload[1]]){
+                
+                console.log('not here yet ',check)
+                if (action.payload[0] === '+') {
+                    state.count = state.count + 1
+                    check[action.payload[1]] = state.count
+                } 
 
-            } else if (action.payload === '-' && state.count != 0) {
-                state.count = state.count - 1
-
+            }else{
+                console.log('already here  ')
+                state.count = check[action.payload[1]]
+                if (action.payload[0] === '+') {
+                    state.count = state.count + 1
+                    check[action.payload[1]] = state.count
+                       console.log(state.count,'count')
+                } else if (action.payload[0] === '-' && state.count != 0) {
+                    state.count = state.count - 1
+                    check[action.payload[1]] = state.count
+                }
             }
-
+             if(action.payload[0] === '' && !check[action.payload[1]]){
+                state.count = 0
+             }else if(action.payload[0] === '' && check[action.payload[1]]){
+                state.count = check[action.payload[1]]
+             }
         },
         addprod: (state, action) => {
-            //  console.log(action.payload,'count')
-            let data = [...action.payload]
-            let tab = []
-            let num = 0
-            data.filter((prod, i) => {
-                if (Number(prod.id) === Number(action.payload[i].id)) {
-                    if (prod.change) {
-                        tab[num] = prod
-
-                    }
-                    tab[num] = prod
-
-                }
-
-            })
-
-            state.countProduct = tab
+       
         },
         neworder: (state, action) => {
 
@@ -126,7 +129,7 @@ const postsSlice = createSlice({
 
 export const selectAllPosts = (state) => state.posts.data;
 export const {
-    order,
+    counter,
     neworder,
     addprod,
     minus

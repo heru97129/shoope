@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import styles from "./product.module.scss";
 import Layout from "../../../components/layout/Layout";
 import {useSelector, useDispatch, dispatch} from "react-redux";
-import {order, selectAllPosts, neworder, addprod,minus} from "../../../features/Users";
+import {counter, selectAllPosts, neworder, addprod,minus} from "../../../features/Users";
 import {fetchPosts} from "../../../features/Users";
 import {Link, useParams, useLocation, useHistory, useRouteMatch} from "react-router-dom";
 import AddInformations from "../../../components/AddInformations/AddInformations";
@@ -15,152 +15,43 @@ let tb = []
 function Products(props) {
 
     const dispatch = useDispatch();
-    const post = useSelector(selectAllPosts);
-    let newShit = useSelector(state => state.posts.order)
-console.log(newShit)
-    const router = useLocation();
-    let [data,
-        setdata] = useState();
-    let [categories,
-        setcategories] = useState();
-    let [items,
-        setitems] = useState(1);
-    let [count,
-        setcount] = useState(1);
-    let [update,
-        setupdate] = useState(false);
-    let [nombre,
-        setnombre] = useState(0);
-    let [newdata,
-        setnewdata] = useState();
+    const post = useSelector(  selectAllPosts);
+    // let newShit = useSelector(state => state.posts.order)
+    let number = useSelector(state => state.posts.count)
 
-    function ItemsSwitch(num) {
-        setitems(num)
-    }
+    let [items,setitem] = useState(1)
+    let [theProduct,setproduct] = useState()
+    let [category,setcategory] = useState([])
+    let [nbrsproduct,setnbrs] = useState(1)
 
-    function NumberofItems(e) {
-        let sign = e.target.innerText
+    let params = useParams()
+    
 
-        if (sign === '+') {
-            
-            setcount(count + 1)
-            
-            dispatch(order('+'))
-            dispatch(neworder(data))
-
-            tb.push({
-                id: data
-                    .map(st => st.id)
-                    .join(''),
-                count: count,
-                change: update
-            })
-            
-            dispatch(addprod(tb))
-            setupdate(false)
-            
-            // console.log('TB DANS PLUS',tb,data,'data',newShit,'Ns')
-        } else if (sign === '-') {
-            dispatch(order('-'))
-            setcount(count - 1)
-            tb.push({
-                id: data
-                    .map(st => st.id)
-                    .join(''),
-                count: count,
-                change: update
-            })
-
-            
-            dispatch(minus(tb))
-
-        }
-    }
-
-    useEffect(() => {
-        setcount(1)
-        setupdate(true)
-        dispatch(fetchPosts("fulfilled"));
-        if (post.length > 0) {
-          
-            let catego;
-            let copy = post.filter((product) => {
-                if (product.id === Number(router.pathname.substring(9))) {
-                    catego = product.category;
-
-                }
-
-                // console.log(newShit,'newshit')
-
-                return product.id === Number(router.pathname.substring(9));
-            });
-            let copyCategories = post.filter((product) => product.category === catego);
-            copyCategories = copyCategories.slice(0, 3);
-             
-            setcategories(copyCategories);
-            setdata(copy)
-            setnewdata(copy)
-            if(data){
-              tb =  [...tb,{id:copy[0].id.toString(),count:count,update:update}]
-           
-            }
+     function numberofProduct(sign){
+       sign = sign.target.innerText
+      dispatch(counter([sign,params[1]]))
+     }
 
 
 
-          let rightproduct =  newShit.find( el => el.id === copy[0].id)
-          
-          if( rightproduct &&  rightproduct.hasOwnProperty('id')){
-              setnombre(rightproduct.compte)
-              setcount(rightproduct.compte)
-          }else{
-            setnombre(0)
-            setcount(0)
+    useEffect(()=>{
+      let rightItems = post.find( el => Number(el.id) === Number(params[1]))
+      let categories = post.find( el => {
 
-          }
-
-        }
-
-    }, [
-        post.length > 0,
-        router.pathname
-    ]);
-
-    function Compteproduct() {
-     if(nombre === 0) newShit = []
-      
-        if (newShit.length > 0) {
-            let compte = newShit.find(news => news.id === data[0].id)
-            let numberprod = compte.compte
-
-            setnombre(numberprod + 1)
-        } else {
-            setnombre(1)
-
-        }
-    }
-
-    function Minusproduct() {
-        if(nombre === 0) newShit = []
-         
-           if (newShit.length > 0) {
-               let compte = newShit.find(news => news.id === data[0].id)
-               let numberprod = compte.compte
-                console.log(numberprod)
-               setnombre(numberprod - 1)
-           } else {
-               setnombre(1)
-   
-           }
-           console.log(nombre)
+       if(rightItems.category === el.category){
+        tb.push(el)
+        setcategory(tb.slice(0,3))
        }
+      })
 
-
-
+      setproduct([rightItems])
+      dispatch(counter(['',params[1]]))
+    },[number,params[1]])
     return (
         <Layout>
             <div className={styles["prod"]}>
                 <div className={styles["prod__describ"]}>
-                    {newdata && newdata.map((product) => {
+                    {theProduct &&theProduct.map((product) => {
                         let {
                             category,
                             description,
@@ -196,17 +87,14 @@ console.log(newShit)
                                     <div className={styles["product-infos__btn"]}>
                                         <div className={styles["btn-add"]}>
                                             <div>
-                                                <p onClick={Minusproduct}>-</p>
+                                                <p onClick={numberofProduct}>-</p>
                                             </div>
                                             <div>
-                                                <p>{nombre}</p>
+                                                <p>{number}</p>
                                             </div>
                                             <div>
                                                 <p
-                                                    onClick={(e) => {
-                                                    NumberofItems(e)
-                                                    Compteproduct()
-                                                }}>+</p>
+                                                    onClick={numberofProduct}>+</p>
                                             </div>
                                         </div>
 
@@ -246,23 +134,23 @@ console.log(newShit)
                                 className={styles[`${items === 1
                                     ? 'li-selected'
                                     : ''}`]}
-                                onClick={() => ItemsSwitch(1)}>Description</li>
+                                onClick={() => setitem(1)}>Description</li>
                             <li
                                 className={styles[`${items === 2
                                     ? 'li-selected'
                                     : ''}`]}
-                                onClick={() => ItemsSwitch(2)}>Aditional information</li>
+                                onClick={() => setitem(2)}>Aditional information</li>
                             <li
                                 className={styles[`${items === 3
                                     ? 'li-selected'
                                     : ''}`]}
-                                onClick={() => ItemsSwitch(3)}>Reviews(0)</li>
+                                onClick={() => setitem(3)}>Reviews(0)</li>
                         </ul>
                     </div>
                     <div className={styles["see-more__content"]}>
-                        {items === 1 && <Desciption articles={categories}/>}
-                        {items === 2 && <AddInformations articles={categories} product={data}/>}
-                        {items === 3 && <Review articles={categories}/>}
+                        {items === 1 && <Desciption articles={category}/>}
+                        {items === 2 && <AddInformations articles={category} product={theProduct}/>}
+                        {items === 3 && <Review articles={category}/>}
 
                     </div>
                 </div>
