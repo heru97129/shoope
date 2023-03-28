@@ -10,7 +10,7 @@ import Shopcard from "../../pages/shopcard/Shopcard";
 
 export function Menu({}) {
   const router = useLocation()
-   const ordero = useSelector(state => state.posts.count)
+   const ordero = useSelector(state => state.posts.countProduct)
    let [showcard,setshow] = useState(false)
    function Showcard(){
     setshow(el => !el)

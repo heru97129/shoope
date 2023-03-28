@@ -50,6 +50,17 @@ const postsSlice = createSlice({
              }else if(action.payload[0] === '' && check[action.payload[1]]){
                 state.count = check[action.payload[1]]
              }
+             console.log(Object.values(check),'values')
+             const initialValue = 0;
+            const sumWithInitial = Object.values(check).reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            initialValue
+            );
+
+            state.countProduct = sumWithInitial
+
+            console.log(state.countProduct,'nombre de produit ')
+
         },
         addprod: (state, action) => {
        
