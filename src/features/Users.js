@@ -17,6 +17,7 @@ const postsSlice = createSlice({
         data: [],
         count: 0,
         countProduct: 0,
+        objchecked : {},
         order: [],
         status: 'idle',
         error: null
@@ -59,68 +60,12 @@ const postsSlice = createSlice({
 
             state.countProduct = sumWithInitial
 
-            console.log(state.countProduct,'nombre de produit ')
+            state.objchecked = {...check}
 
         },
         addprod: (state, action) => {
-       
+          state.objchecked = {...check}
         },
-        neworder: (state, action) => {
-
-            let data = action.payload
-
-            let newData = {
-                ...data[0]
-            }
-            if (!check[data[0].id]) {
-                compte = 1
-                check[data[0].id] = 'test'
-
-                newData.compte = compte
-                tab.push(newData)
-
-            } else {
-
-                let newItem = {}
-                tab.forEach((item, i) => {
-                    let {id} = item
-                    newItem = {
-                        ...item
-                    }
-                    if (id === data[0].id) {
-
-                        newItem.compte += 1
-
-                        tab.slice(i, 1)
-                        tab[i] = newItem
-                    }
-                })
-
-            }
-
-            state.order = [...tab]
-        },
-
-        minus : (state,action) =>{
-           console.log(action.payload,'payload')
-           let data = action.payload
-           
-           let obj = {...data.at(-1)}
-           let newdata = {...tab.at(-1)}
-            
-           console.log(obj,check,tab,newdata)
-
-        //    tab.forEach(el => {
-        //     if(Number(el.id) === Number(obj.id)){
-        //       console.log('right data')
-        //       el.compte = obj.count
-        //       console.log(el)
-        //     }
-        //    })
-        newdata.compte = obj.count
-        tab.push(newdata)
-         state.order = [...tab]
-        }
 
     },
     extraReducers: {
@@ -143,7 +88,8 @@ export const {
     counter,
     neworder,
     addprod,
-    minus
+    minus,
+    objchecked
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
