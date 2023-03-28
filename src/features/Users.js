@@ -16,7 +16,7 @@ const postsSlice = createSlice({
     initialState: {
         data: [],
         count: 0,
-        countProduct: [],
+        countProduct: 0,
         order: [],
         status: 'idle',
         error: null

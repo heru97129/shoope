@@ -25,7 +25,7 @@ function Products(props) {
     let [nbrsproduct,setnbrs] = useState(1)
 
     let params = useParams()
-    
+    console.log(post)
 
      function numberofProduct(sign){
        sign = sign.target.innerText
@@ -35,18 +35,24 @@ function Products(props) {
 
 
     useEffect(()=>{
-      let rightItems = post.find( el => Number(el.id) === Number(params[1]))
-      let categories = post.find( el => {
+        dispatch(fetchPosts('fulfilled'));
+         if(post.length > 0){
+            let rightItems = post.find( el => Number(el.id) === Number(params[1]))
+            let categories = post.find( el => {
+      
+             if(rightItems.category === el.category){
+              tb.push(el)
+              setcategory(tb.slice(0,3))
+             }
 
-       if(rightItems.category === el.category){
-        tb.push(el)
-        setcategory(tb.slice(0,3))
-       }
-      })
-
+             
       setproduct([rightItems])
       dispatch(counter(['',params[1]]))
-    },[number,params[1]])
+            })
+         }
+   
+
+    },[number,params[1],post.length > 0])
     return (
         <Layout>
             <div className={styles["prod"]}>
