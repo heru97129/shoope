@@ -8,19 +8,30 @@ function Shopcard(props) {
     const order = useSelector(state => state.posts.objchecked)
     const post = useSelector(  selectAllPosts)
     let[products,setproduct] = useState([])
-    let tab = []
-    console.log(order,post)
-    useEffect(()=>{
-      post.forEach((element,i) => {
-        console.log(typeof Object.keys(order)[i] )
-        if(Number(element.id) === Number(Object.keys(order)[i]) ){
-          tab.push(element)
-          console.log(tab,'tab')
-          setproduct(tab)
-        }
-      });
+    console.log(order,post,'order é post')
+    let tab  = []
 
-    },[])
+
+    useEffect(()=>{
+     Object.keys(order).forEach((id)=>{
+      post.forEach((element,i) => {
+        console.log(element.id, id)
+           if( element.id === Number(id)){
+
+            if(order[element.id] !==  0){
+              tab.push(element)
+  
+             }
+         
+           console.log(tab,'tab')
+
+           setproduct([...tab])
+           }
+      });
+     })
+    
+
+    },[order])
 
     console.log(products)
     return (
@@ -30,7 +41,7 @@ function Shopcard(props) {
                 <p>{order.length} items</p>
                 <div className={styles['product']}>
                   {
-                   tab && tab.map(data =>{
+                   products && products.map(data =>{
                         const {image,id,compte,price} = data
 
                         return(

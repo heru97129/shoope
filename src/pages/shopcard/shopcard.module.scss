@@ -6,7 +6,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    height: 100vh;
+    min-height: 100vh;
+    max-height: 150vh;
     z-index: 454;
     background-color: rgb(255, 255, 255);
     width: 20%;
