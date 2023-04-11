@@ -4,14 +4,17 @@
 
 .shopcard{
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -47px;
+    right: -125px;
     min-height: 100vh;
-    max-height: 150vh;
+    max-height: fit-content;
     z-index: 454;
     background-color: rgb(255, 255, 255);
-    width: 20%;
+    width: 25%;
     padding: 1em;
+    border-left: 1px dashed black;
+    display: flex;
+  
 
     &__bag{
         margin-top: 3em;
@@ -19,7 +22,7 @@
             .card{
                 display: flex;
                 height: 200px;
-                margin: 2em 0;
+                margin: 3em 0;
                 gap: 0 1EM;
                 &__pic{
                  width: 100%;
@@ -27,19 +30,68 @@
                  img{
                     width: 100%;
                     height: 100%;
+                    margin-top: 1em;
+
                  }
                 }
                 &__details{
+                    h5{
+                        margin-top: 1em;
+                    }
                     width: 100%;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+
+                    .cross{
+                    display: flex;
+                    justify-content: flex-end;
+                    }
                   .details{
                     &__price{
                         color: $yelow ;
                     }
                   }
+
+                  .quantity{
+                    transform: translateY(1em);
+
+                    p{
+                        span{
+                            padding:0 .5em;
+                        }
+                        .span{
+                            margin-left: .5em;
+                        } 
+                    }
+                  }
                 }
+            }
+            &__view{
+                padding: 2em;
+                position: relative;
+               .title-view{
+                display: flex;
+                justify-content: space-between;
+               } 
+               button{
+               width: 100%;
+               margin-top: 1em;
+               padding: 1em;
+               font-weight: 750;
+               background-color: white;
+               border: 1px solid black;
+               border-radius: 5px;
+               }
+
+               ::after{
+                content: "";
+                position:absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                border-top: 1px dashed black;
+               }
             }
         }
     }

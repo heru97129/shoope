@@ -24,23 +24,22 @@ const postsSlice = createSlice({
     },
     reducers: {
         counter: (state, action) => {
-            console.log(action.payload)
+
         
             if(!check[action.payload[1]]){
                 
-                console.log('not here yet ',check)
+   
                 if (action.payload[0] === '+') {
                     state.count = state.count + 1
                     check[action.payload[1]] = state.count
                 } 
 
             }else{
-                console.log('already here  ')
                 state.count = check[action.payload[1]]
                 if (action.payload[0] === '+') {
                     state.count = state.count + 1
                     check[action.payload[1]] = state.count
-                       console.log(state.count,'count')
+   
                 } else if (action.payload[0] === '-' && state.count != 0) {
                     state.count = state.count - 1
                     check[action.payload[1]] = state.count
@@ -51,7 +50,6 @@ const postsSlice = createSlice({
              }else if(action.payload[0] === '' && check[action.payload[1]]){
                 state.count = check[action.payload[1]]
              }
-             console.log(Object.values(check),'values')
              const initialValue = 0;
             const sumWithInitial = Object.values(check).reduce(
             (accumulator, currentValue) => accumulator + currentValue,
@@ -66,6 +64,9 @@ const postsSlice = createSlice({
         addprod: (state, action) => {
           state.objchecked = {...check}
         },
+        addnewproduct : (state,action) =>{
+            console.log(action.payload,'product')
+        }
 
     },
     extraReducers: {
@@ -88,7 +89,7 @@ export const {
     counter,
     neworder,
     addprod,
-    minus,
+    addnewproduct,
     objchecked
 } = postsSlice.actions;
 

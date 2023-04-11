@@ -7,9 +7,6 @@ import { useSelector, useDispatch, dispatch } from "react-redux";
 import {
   counter,
   selectAllPosts,
-  neworder,
-  addprod,
-  minus,
 } from "../../../features/Users";
 import { fetchPosts } from "../../../features/Users";
 import {
