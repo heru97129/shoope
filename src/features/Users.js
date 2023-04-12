@@ -20,7 +20,9 @@ const postsSlice = createSlice({
         objchecked : {},
         order: [],
         status: 'idle',
-        error: null
+        error: null,
+        currentProduct : [],
+        totalprice: 0
     },
     reducers: {
         counter: (state, action) => {
@@ -66,6 +68,11 @@ const postsSlice = createSlice({
         },
         addnewproduct : (state,action) =>{
             console.log(action.payload,'product')
+
+            state.currentProduct = [...action.payload[0]]
+            state.totalprice = action.payload[1]
+
+            console.log(state.currentProduct,'curr')
         }
 
     },
@@ -90,7 +97,8 @@ export const {
     neworder,
     addprod,
     addnewproduct,
-    objchecked
+    objchecked,
+    currentProduct
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
