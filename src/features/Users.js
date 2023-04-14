@@ -15,7 +15,7 @@ const postsSlice = createSlice({
     name: 'posts',
     initialState: {
         data: [],
-        count: 0,
+        count: 0, 
         countProduct: 0,
         objchecked : {},
         order: [],

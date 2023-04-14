@@ -3,18 +3,16 @@ import React from "react";
 import { useEffect, useState } from "react";
 import styles from "./product.module.scss";
 import Layout from "../../../components/layout/Layout";
-import { useSelector, useDispatch, dispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   counter,
   selectAllPosts,
 } from "../../../features/Users";
 import { fetchPosts } from "../../../features/Users";
 import {
-  Link,
+
   useParams,
-  useLocation,
-  useHistory,
-  useRouteMatch,
+
 } from "react-router-dom";
 import AddInformations from "../../../components/AddInformations/AddInformations";
 import Review from "../../../components/review/Review";
@@ -24,13 +22,12 @@ let tb = [];
 function Products(props) {
   const dispatch = useDispatch();
   const post = useSelector(selectAllPosts);
-  // let newShit = useSelector(state => state.posts.order)
   let number = useSelector((state) => state.posts.count);
 
   let [items, setitem] = useState(1);
   let [theProduct, setproduct] = useState();
   let [category, setcategory] = useState([]);
-  let [nbrsproduct, setnbrs] = useState(1);
+
 
   let params = useParams();
 
@@ -60,7 +57,7 @@ function Products(props) {
         <div className={styles["prod__describ"]}>
           {theProduct &&
             theProduct.map((product) => {
-              let { category, description, id, image, price, title, compte } =
+              let {  description, id, image, price, title} =
                 product;
 
               return (
