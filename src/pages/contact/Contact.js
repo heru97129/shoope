@@ -2,7 +2,7 @@ import React, {useEffect, useState, useReducer, useRef} from "react";
 import Layout from "../../components/layout/Layout";
 import styles from "./contact.module.scss";
 import db from "../../firebase/config";
-import { collection,getDocs,addDoc } from "firebase/firestore";
+import { collection,addDoc } from "firebase/firestore";
 
 //  find all the users in the collection users
 
