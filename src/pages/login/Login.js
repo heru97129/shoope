@@ -4,8 +4,30 @@ import React, { useEffect, useState } from "react";
 import styles from "./login.module.scss";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRef } from "react";
+import {  onAuthStateChanged } from "firebase/auth";
 
 function Login(props) {
+
+  const authChange = getAuth();
+  onAuthStateChanged(authChange, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const userChange = user;
+      console.log(userChange,'user')
+      // ...
+    } else {
+      // User is signed out
+      // ...
+      console.log(user,'user')
+    }
+  });
+
+
+
+
+
+
   const auth = getAuth();
   let [sign, setsign] = useState(false);
 
@@ -50,9 +72,6 @@ function Login(props) {
 
   }
 
-  function leave(){
-   loginRef.current.style = 'display:none'
-  }
 
   useEffect(() => {
     setuser({ ...users, firstname, lastname, email, password });
@@ -84,7 +103,7 @@ function Login(props) {
             />
           : 
             <SignIne
-               leave={leave}
+       
               styles={styles}
               SignInspan={SignInspan}
             />

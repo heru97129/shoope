@@ -3,10 +3,8 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {prettyDOM} from '@testing-library/react';
 import axios from 'axios';
 import {act} from 'react-dom/test-utils';
-let compteById = {};
-let tab = []
+
 let check = {}
-let compte = 0
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async() => {
     const response = await axios.get("https://fakestoreapi.com/products");
     return response.data;

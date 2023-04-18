@@ -6,6 +6,7 @@ import Layout from "../../components/layout/Layout";
 import styles from "./account.module.scss";
 import Download from "../../components/download/Download";
 import { useSelector, useDispatch,dispatch, createStoreHook } from "react-redux";
+import Logout from '../../components/logout/Logout';
 
 
 function Account(props) {
@@ -66,9 +67,9 @@ function Account(props) {
           {select === 0 && <Dashboard />}
           {select == 1 && <Order />}
           {select == 2 && <Download />}
-          {select == 3 && <Adresse     />
-        
-        }
+          {select == 3 && <Adresse     /> }
+          {select == 5 && <Logout  /> }
+
         </div>
       </div>
     </Layout>

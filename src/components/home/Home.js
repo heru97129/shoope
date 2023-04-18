@@ -8,7 +8,7 @@ function Home(props) {
     return (
         <>
            <Layout>
-            <Login />
+    
             <Banner />
             <Lastest />
             </Layout> 

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import Shop from "./pages/shop/Shop";
 import Blog from "./pages/blog/Blog";
 import OurStory from "./pages/ourstory/OurStory";
-import Layout from "./components/layout/Layout";
+import Login from "./pages/login/Login";
 import Account from "./pages/account/Account";
 import postsReducer from './features/Users';
 import Products from "./pages/product/articles/Products";
@@ -39,6 +39,7 @@ root.render(
       <Route path="/product/:1"   element={<Products />}/>
       <Route path="contact"   element={<Contact />}/>
       <Route path="shopping"   element={<ShoopingCard/>}/>
+      <Route path="login"   element={<Login />}/>
 
     </Routes>
   </BrowserRouter>

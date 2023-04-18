@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Navigate } from "react-router";
 
 
 
@@ -12,6 +13,8 @@ export default function SignIn({  styles,SignInspan,leave }) {
 
 
   const auth = getAuth();
+  let [login,setlogin] = useState(false)
+
     let [email,setemail] = useState()
     let [password,setpass] = useState()
     let [user,setuser] = useState({
@@ -25,7 +28,7 @@ export default function SignIn({  styles,SignInspan,leave }) {
   .then((userCredential) => {
     // Signed in 
     const users = userCredential.user;
-   leave()
+    setlogin(true)
     // ...
   })
   .catch((error) => {
@@ -74,6 +77,7 @@ setpass('')
         <p className={styles["sign-in"]}>
             You don't have an account yet <span onClick={()=>SignInspan(false)}>sign up</span>
           </p>
+          {login && <Navigate to="/"/>}
       </div>
     </div>
   );
