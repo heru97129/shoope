@@ -17,6 +17,17 @@
     &__left{
         width: 100%;
         background-color: $yelow;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .image{
+            width: 70%;
+            img{
+                width: 100%;
+                height: fit-content;
+            }
+
+        }
     }
     &__input{
         width: 100%;
@@ -47,7 +58,37 @@
             font-weight: 600;
             color: white;
             border: none;
+            border-radius: 5px;
            }
+
+        //    text
+           .sign-in{
+            margin-top: 1em;
+
+            span{
+                color: $yelow;
+                cursor: pointer;
+
+            }
+           }
+            
+
+        //    section sign in 
+           .sign-in-div{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .input_sign{
+                margin: 2em 0;
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+    
+               }
+           }
+
+          
         }
     }
 }
@@ -55,6 +96,7 @@
     border: none;
     border-bottom: 1px solid black;
     padding: 1em 0;
+    outline: none;
 }
 .color{
     color: $yelow;

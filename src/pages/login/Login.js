@@ -1,28 +1,98 @@
-import React from 'react';
-import styles from './login.module.scss'
+import SignIne  from "../../components/SignIn/SignIne";
+import { Subscribe } from "../../components/Subscribe/Subscribe";
+import React, { useEffect, useState } from "react";
+import styles from "./login.module.scss";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useRef } from "react";
 
 function Login(props) {
-    return (
-        <div className={styles['login']}>
-            <div className={styles['login__left']}></div>
-            <div className={styles['login__input']}>
-                <div className={styles['inner']}>
-                    <h1>Subscribe To  <span className={styles['color']}>SHOOPE</span>  !!</h1>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                      
-                      <div className={styles['input_field']}>
-                    <input type='text' placeholder='FISRTNAME' className={styles['inp_style']}  />
-                    <input type='text' placeholder='LASTNAME' className={styles['inp_style']} />
-                    <input type='text' placeholder='EMAIL' className={styles['inp_style']} />
-                    <input type='text' placeholder='PASSWORD' className={styles['inp_style']} />
-                    </div>
-                    <button className={styles['btn']}>SUBMIT</button>
-                </div>
+  const auth = getAuth();
+  let [sign, setsign] = useState(false);
 
-            </div>
-          
+  let [firstname, setfirst] = useState();
+  let [lastname, setlast] = useState();
+  let [email, setmail] = useState();
+  let [password, setpass] = useState();
+  let [users, setuser] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
+
+  let loginRef = useRef(null)
+
+
+  function catchUsers() {
+    console.log(users);
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+
+    setfirst("");
+    setlast("");
+    setmail("");
+    setpass("");
+  }
+
+  function SignInspan(data) {
+    setsign(data)
+
+  }
+
+  function leave(){
+   loginRef.current.style = 'display:none'
+  }
+
+  useEffect(() => {
+    setuser({ ...users, firstname, lastname, email, password });
+    console.log(users);
+  }, [firstname, lastname, email, password]);
+
+  return (
+    <div className={styles["login"]} ref={loginRef} >
+      <div className={styles["login__left"]}>
+        <div className={styles["image"]}>
+          <img src="images/undraw_Shopping_Bags_tdby (1).png" />
         </div>
-    );
+      </div>
+      <div className={styles["login__input"]}>
+        <div className={styles["inner"]}>
+          {!sign ? 
+            <Subscribe
+              firstname={firstname}
+              styles={styles}
+              setfirst={setfirst}
+              lastname={lastname}
+              setlast={setlast}
+              email={email}
+              setmail={setmail}
+              password={password}
+              setpass={setpass}
+              catchUsers={catchUsers}
+              SignInspan={SignInspan}
+            />
+          : 
+            <SignIne
+               leave={leave}
+              styles={styles}
+              SignInspan={SignInspan}
+            />
+          }
+        
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Login;
