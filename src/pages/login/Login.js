@@ -31,6 +31,7 @@ function Login(props) {
         // Signed in
         const user = userCredential.user;
         // ...
+        alert('votre compte a été créer')
       })
       .catch((error) => {
         const errorCode = error.code;
