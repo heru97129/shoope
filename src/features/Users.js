@@ -1,8 +1,8 @@
-import {objectMethod} from '@babel/types';
+
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {prettyDOM} from '@testing-library/react';
+
 import axios from 'axios';
-import {act} from 'react-dom/test-utils';
+
 
 let check = {}
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async() => {
@@ -64,13 +64,22 @@ const postsSlice = createSlice({
         addprod: (state, action) => {
           state.objchecked = {...check}
         },
-        addnewproduct : (state,action) =>{
+        addnewproduct :  (state,action) =>{
             console.log(action.payload,'product')
 
             state.currentProduct = [...action.payload[0]]
             state.totalprice = action.payload[1]
-
+            let objDb = {
+                id:'G6UaLh3rmHPNEaO5WCmz7Olyoo13',
+                product : state.currentProduct
+            }
             console.log(state.currentProduct,'curr')
+
+
+            // firebase adddoc
+       
+          
+              
         }
 
     },

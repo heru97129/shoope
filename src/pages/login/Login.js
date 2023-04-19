@@ -31,7 +31,7 @@ function Login(props) {
   const auth = getAuth();
   let [sign, setsign] = useState(false);
 
-  let [firstname, setfirst] = useState();
+  let [displayName, setdisplayName] = useState();
   let [lastname, setlast] = useState();
   let [email, setmail] = useState();
   let [password, setpass] = useState();
@@ -46,9 +46,9 @@ function Login(props) {
 
 
   function catchUsers() {
-    console.log(users);
 
-    createUserWithEmailAndPassword(auth, email, password)
+
+    createUserWithEmailAndPassword(auth, email, password,displayName)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -61,7 +61,7 @@ function Login(props) {
         // ..
       });
 
-    setfirst("");
+    setdisplayName("");
     setlast("");
     setmail("");
     setpass("");
@@ -74,9 +74,9 @@ function Login(props) {
 
 
   useEffect(() => {
-    setuser({ ...users, firstname, lastname, email, password });
+    setuser({ ...users, displayName, lastname, email, password });
     console.log(users);
-  }, [firstname, lastname, email, password]);
+  }, [displayName, lastname, email, password]);
 
   return (
     <div className={styles["login"]} ref={loginRef} >
@@ -89,9 +89,9 @@ function Login(props) {
         <div className={styles["inner"]}>
           {!sign ? 
             <Subscribe
-              firstname={firstname}
+              firstname={displayName}
               styles={styles}
-              setfirst={setfirst}
+              setfirst={setdisplayName}
               lastname={lastname}
               setlast={setlast}
               email={email}

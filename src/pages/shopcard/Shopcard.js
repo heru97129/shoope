@@ -9,7 +9,6 @@ function Shopcard(props) {
   const post = useSelector(selectAllPosts);
   let [products, setproduct] = useState([]);
   let [finalcompte, setfinal] = useState([]);
-
   let tab = [];
   let dispatch = useDispatch();
 
@@ -48,6 +47,7 @@ function Shopcard(props) {
     dispatch(addnewproduct([products,finalcompte]))
 
   }, [order, products.length > 0,finalcompte]);
+  console.log(products,'order')
 
   return (
     <div className={styles["shopcard"]}>

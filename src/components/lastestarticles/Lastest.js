@@ -25,18 +25,17 @@ useEffect(() => {
   if(post.length > 0){
     const copy = post.slice(0,6)
     setproducts(copy)
-    console.log(products )
+
 
         
   }
 
 
-  console.log(products,'effect')
+
 }, [post.length > 0]);
 
 
 
-console.log(post)
   return (
     <div className={styles['lastest']}>
       <div className={styles['lastest__title']}>
