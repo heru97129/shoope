@@ -4,6 +4,8 @@ import styles from "./contact.module.scss";
 import db from "../../firebase/config";
 import { collection,addDoc } from "firebase/firestore";
 
+import AccountRq from '../../firebase/model/account'
+
 //  find all the users in the collection users
 
       // (async () =>{
@@ -18,7 +20,7 @@ import { collection,addDoc } from "firebase/firestore";
 
 
 function Contact(props) {
-
+    let accountReq = new AccountRq()
     const [user,
         setuser] = useReducer((state, newState) => ({
         ...state,
@@ -42,9 +44,8 @@ function Contact(props) {
     let all_Input = useRef(null)
     all_Input.current = []
     
-    const Handleclick = async () => {
-      const colRef = collection(db,'users')
-      await addDoc(colRef,user)
+    const Handleclick = () => {
+      accountReq.Create(user)
 
       all_Input.current.forEach(element => element !== null ? element.value = '' : null);
 

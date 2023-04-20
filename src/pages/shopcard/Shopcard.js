@@ -31,7 +31,7 @@ function Shopcard(props) {
     });
     let tabprice = [];
 
-    console.log(products, "prod");
+
     products.forEach((element) => {
       tabprice.push(element.price * order[element.id]);
       console.log(tabprice);
@@ -47,7 +47,7 @@ function Shopcard(props) {
     dispatch(addnewproduct([products,finalcompte]))
 
   }, [order, products.length > 0,finalcompte]);
-  console.log(products,'order')
+
 
   return (
     <div className={styles["shopcard"]}>

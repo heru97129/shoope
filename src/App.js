@@ -15,7 +15,7 @@ import { set } from 'immutable';
 function App() {
     
   let [userHere,setuserHere] = useState(true)
-  let [id,setid] = useState()
+
   const authChange = getAuth();
 
 
@@ -27,9 +27,8 @@ console.log(userHere)
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const userChange = user;
-        // console.log(userChange,'user')
+        console.log(userChange,'user')
         console.log(userChange.uid,'user')
-        setid(userChange.uid)
 
         // ...
         setuserHere(true)

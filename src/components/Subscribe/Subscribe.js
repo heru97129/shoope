@@ -1,8 +1,5 @@
 import React from "react";
 
-
-
-
 export function Subscribe({
   firstname,
   setfirst,
@@ -14,7 +11,7 @@ export function Subscribe({
   setpass,
   catchUsers,
   styles,
-  SignInspan
+  SignInspan,
 }) {
   return (
     <>
@@ -60,8 +57,9 @@ export function Subscribe({
         SUBMIT
       </button>
       <p className={styles["sign-in"]}>
-            You already have an account <span onClick={()=>SignInspan(true)}>sign in</span>
-          </p>
+        You already have an account{" "}
+        <span onClick={() => SignInspan(true)}>sign in</span>
+      </p>
     </>
   );
 }

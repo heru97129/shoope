@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Navigate } from "react-router";
+import Auth from "../../firebase/model/authentification";
 
 
 
@@ -11,12 +11,11 @@ import { Navigate } from "react-router";
 
 export default function SignIn({  styles,SignInspan,leave }) {
 
-
-  const auth = getAuth();
+   let authSucess = new Auth()
   let [login,setlogin] = useState(false)
 
-    let [email,setemail] = useState()
-    let [password,setpass] = useState()
+    let [email,setemail] = useState('')
+    let [password,setpass] = useState('')
     let [user,setuser] = useState({
       email:'',
       password:''
@@ -24,23 +23,18 @@ export default function SignIn({  styles,SignInspan,leave }) {
 
     function UserConnect(){
     console.log(user)
-    signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const users = userCredential.user;
-    setlogin(true)
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+     authSucess.Sign(email,password).then(()=>{
+      setlogin(true)
+     })
+ 
+     console.log(login)
 setemail('')
 setpass('')
     }
 
     useEffect(()=>{
       setuser({...user,email,password})
+      console.log(user)
     },[email,password])
 
 
