@@ -16,14 +16,22 @@ import {
 } from "react-router-dom";
 import AddInformations from "../../../components/AddInformations/AddInformations";
 import Review from "../../../components/review/Review";
+import AddProducts from '../../../firebase/model/products';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 let tb = [];
 
 function Products(props) {
+  let addProducts = new AddProducts()
+  const authChange = getAuth();
+
   const dispatch = useDispatch();
   const post = useSelector(selectAllPosts);
   let number = useSelector((state) => state.posts.count);
 
+  let [currcollect,setcurrcollect] = useState()
+
+  let [id,setid] = useState()
   let [items, setitem] = useState(1);
   let [theProduct, setproduct] = useState();
   let [category, setcategory] = useState([]);
@@ -50,6 +58,41 @@ function Products(props) {
         dispatch(counter(["", params[1]]));
       });
     }
+
+
+
+    onAuthStateChanged(authChange, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const userChange = user;
+
+        setid(userChange.uid)
+
+
+      } else {
+        // User is signed out
+        // ...
+        console.log(user,'user')
+     
+      }
+    });
+    console.log(theProduct)
+    // find if the id is in the collection 
+   let data =  addProducts.fetchdata().then((value)=>{
+       console.log(value[0].id['stringValue'])
+       setcurrcollect(value[0].id['stringValue'])
+    })
+    console.log(currcollect)
+    if(currcollect === id){
+      console.log('yeah')
+      let dataprod = []
+      data.prod
+      console.log(dataprod,'hkjghkjjkjhhkjh')
+      addProducts.updateData(id,dataprod)
+    }
+    // addProducts.addList(theProduct,id)
+  
   }, [number, params[1], post.length > 0]);
   return (
     <Layout>
