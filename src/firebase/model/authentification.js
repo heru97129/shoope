@@ -1,6 +1,10 @@
 
 import db from "../config";
+import { doc,setDoc,collection } from 'firebase/firestore'
+
 import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
+import firebaseapp from "../setupDb";
+import { async } from "@firebase/util";
 
 let data ={}
 
@@ -10,6 +14,7 @@ class Auth{
      this.db = db
      this.collection = 'users'
      this.data = null
+     this.Firebase = firebaseapp
     }
 
    
@@ -30,14 +35,29 @@ class Auth{
       
     }
 
-    async  Create(email,password){
+    async  Create(email,password,displayName,lastanme){
+      let data = {
+        name:displayName,
+        lastanme:lastanme,
+        job:'janitor'
+      }
 
         return   await   createUserWithEmailAndPassword(this.getAuth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          // ...
-          alert('votre compte a été créer')
+        .then( async (userCredential) => {
+          // Signed *
+          alert('account created')
+          try {
+            await setDoc(doc(this.db, 'user',userCredential.user.uid),data)
+            await setDoc(doc(this.db, 'products',userCredential.user.uid),{
+              name:displayName
+            })
+
+        } catch (e) {
+            console.error(e); // handle your error here
+        } finally {
+            console.log('Cleanup here'); // cleanup, always executed
+        }
+   
         })
         .catch((error) => {
           const errorCode = error.code;

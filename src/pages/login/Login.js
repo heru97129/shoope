@@ -47,7 +47,7 @@ function Login(props) {
 
   function catchUsers() {
 
-    authSucces.Create(email,password)
+    authSucces.Create(email,password,displayName,lastname)
   
 
     setdisplayName("");
