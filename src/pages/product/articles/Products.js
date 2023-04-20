@@ -87,7 +87,7 @@ function Products(props) {
     if(currcollect === id){
       console.log('yeah')
       let dataprod = []
-      data.prod
+
       console.log(dataprod,'hkjghkjjkjhhkjh')
       addProducts.updateData(id,dataprod)
     }
