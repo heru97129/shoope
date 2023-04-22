@@ -35,13 +35,15 @@ function Products(props) {
   let [items, setitem] = useState(1);
   let [theProduct, setproduct] = useState();
   let [category, setcategory] = useState([]);
+  let [products, setproducts] = useState([]);
 
 
   let params = useParams();
 
   function numberofProduct(sign) {
     sign = sign.target.innerText;
-    dispatch(counter([sign, params[1]]));
+   
+    dispatch(counter([sign, params[1],post]));
   }
 
   useEffect(() => {
@@ -77,21 +79,8 @@ function Products(props) {
      
       }
     });
-    console.log(theProduct)
-    // find if the id is in the collection 
-   let data =  addProducts.fetchdata().then((value)=>{
-       console.log(value[0].id['stringValue'])
-       setcurrcollect(value[0].id['stringValue'])
-    })
-    console.log(currcollect)
-    if(currcollect === id){
-      console.log('yeah')
-      let dataprod = []
+    console.log(id)
 
-      console.log(dataprod,'hkjghkjjkjhhkjh')
-      addProducts.updateData(id,dataprod)
-    }
-    // addProducts.addList(theProduct,id)
   
   }, [number, params[1], post.length > 0]);
   return (

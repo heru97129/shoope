@@ -2,10 +2,11 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 import axios from 'axios';
+import AddProducts from '../firebase/model/products';
 
 
 let check = {}
-
+let tab = []
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async() => {
     const response = await axios.get("https://fakestoreapi.com/products");
     return response.data;
@@ -59,6 +60,39 @@ const postsSlice = createSlice({
 
             state.countProduct = sumWithInitial
 
+
+            //  if the arrau of prodct exist
+            if(action.payload[2]){
+                console.log(check.hasOwnProperty(action.payload[1]),Object.keys(check))
+             
+            action.payload[2].filter(data => {
+
+            if(Number(data.id) === Number(action.payload[1])){
+                console.log('in therre 1')
+
+                tab.forEach((prod)=>{
+                    console.log(prod.id,'id tab')
+                    if(Number(prod.id) === Number(action.payload[1])){
+                        console.log('in therre')
+                         return  prod.compte = state.count
+                    } else{
+                        console.log('not in  therre')
+
+                        tab.push({...data})
+
+                    }
+                })
+
+                if(tab.length === 0){
+                    tab.push({...data})
+
+                }
+            }
+            
+            })
+              console.log(tab)
+            }
+
             state.objchecked = {...check}
 
         },
@@ -70,11 +104,7 @@ const postsSlice = createSlice({
 
             state.currentProduct = [...action.payload[0]]
             state.totalprice = action.payload[1]
-            let objDb = {
-                id:'G6UaLh3rmHPNEaO5WCmz7Olyoo13',
-                product : state.currentProduct
-            }
-            console.log(state.currentProduct,'curr')
+     
 
 
             // firebase adddoc
