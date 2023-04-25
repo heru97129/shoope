@@ -40,7 +40,7 @@ class AddProducts {
      console.log(id,product,'yooo')
             try {
             //   const todoDocument = doc(this.db,this.collectionRef, 'KwrDqVxuWJmMAYEEIrSa');
-              await updateDoc(doc(this.db,this.collectionRef, 'KwrDqVxuWJmMAYEEIrSa'), {
+              await updateDoc(doc(this.db,this.collectionRef, id), {
                 product: product
               });
         
