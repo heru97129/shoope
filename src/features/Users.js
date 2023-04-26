@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-import axios from "axios";
 import AddProducts from "../firebase/model/products";
+import axios from "axios";
 
 let check = {};
 let checkProduct = {};
 let tab = [];
 let stop = true
+let addProduct = new AddProducts()
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
   return response.data;
@@ -84,6 +84,10 @@ const postsSlice = createSlice({
         });
 
         console.log(tab);
+        if(action.payload[3]){
+          addProduct.updateData(action.payload[3],tab)
+
+        }
       }
 
       state.objchecked = { ...check };

@@ -43,7 +43,7 @@ function Products(props) {
   function numberofProduct(sign) {
     sign = sign.target.innerText;
    
-    dispatch(counter([sign, params[1],post]));
+    dispatch(counter([sign, params[1],post,id]));
   }
 
   useEffect(() => {
