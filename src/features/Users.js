@@ -5,8 +5,8 @@ import axios from "axios";
 let check = {};
 let checkProduct = {};
 let tab = [];
-let stop = true
-let addProduct = new AddProducts()
+let stop = true;
+let addProduct = new AddProducts();
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
   return response.data;
@@ -23,9 +23,30 @@ const postsSlice = createSlice({
     error: null,
     currentProduct: [],
     totalprice: 0,
+    datafromFetch : {}
   },
   reducers: {
     counter: (state, action) => {
+      let fetchDoc = addProduct.fetchdata();
+
+    fetchDoc.then(   async   (el) => {
+        el.forEach(async (el) => {
+          console.log(el?.name?.stringValue);
+          if (el?.name?.stringValue === "kevin") {
+           el.product.arrayValue.values.forEach(  (prod) => {
+              const { id, compte } = prod.mapValue.fields;
+              let obj = {};
+              obj[id.integerValue] = compte.integerValue;
+              state.datafromFetch = { ...obj };
+
+            });
+          }
+        });
+      });
+     
+
+      console.log(state.datafromFetch,'check')
+
       if (!check[action.payload[1]]) {
         if (action.payload[0] === "+") {
           state.count = state.count + 1;
@@ -53,40 +74,39 @@ const postsSlice = createSlice({
       );
 
       state.countProduct = sumWithInitial;
-       
 
       //  if the array of prodct exist
-      let newdata = {}
       if (action.payload[2]) {
-         console.log(checkProduct,'prod')
+        console.log(checkProduct, "prod");
         action.payload[2].forEach((data) => {
-    
-// si il n'y as pas se produit dans l'array ajouter un produits
-         if(Number(data.id) === Number(action.payload[1]) && checkProduct[data.id] === undefined){
-            checkProduct[action.payload[1]] = action.payload[1]
+          // si il n'y as pas se produit dans l'array ajouter un produits
+          if (
+            Number(data.id) === Number(action.payload[1]) &&
+            checkProduct[data.id] === undefined
+          ) {
+            checkProduct[action.payload[1]] = action.payload[1];
 
-            console.log('new one')
-            tab.push({...data})
-         }
+            console.log("new one");
+            tab.push({ ...data });
+          }
 
-
-         if(Number(data.id) === Number(action.payload[1]) && checkProduct[data.id]){
-            console.log('already in ')
-// ajoute le compte si le produit existe déja
-           tab.forEach(el =>{ 
-            if(Number(el.id) ===Number(data.id)){
-               el.compte = state.count
-           }}
-           )
-
-         }
-         
+          if (
+            Number(data.id) === Number(action.payload[1]) &&
+            checkProduct[data.id]
+          ) {
+            console.log("already in ");
+            // ajoute le compte si le produit existe déja
+            tab.forEach((el) => {
+              if (Number(el.id) === Number(data.id)) {
+                el.compte = state.count;
+              }
+            });
+          }
         });
 
         console.log(tab);
-        if(action.payload[3]){
-          addProduct.updateData(action.payload[3],tab)
-
+        if (action.payload[3]) {
+          addProduct.updateData(action.payload[3], tab);
         }
       }
 
