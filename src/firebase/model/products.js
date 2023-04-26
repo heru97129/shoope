@@ -1,5 +1,5 @@
 
-import { collection, addDoc, serverTimestamp, getDocs, doc, deleteDoc,updateDoc } from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp, getDocs, doc, query,updateDoc,where} from 'firebase/firestore'
 import db from '../config'
 
 
@@ -8,6 +8,7 @@ class AddProducts {
     constructor(){
       this.collectionRef = 'products'
       this.db = db
+      this.dope = {}
 
     }
 
@@ -48,6 +49,18 @@ class AddProducts {
               console.log(err);
             }
           
+    }
+
+
+    async Get(){
+      const q = query(collection(this.db, this.collectionRef), where("name", "==", 'kevin'));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+       this.dope = {...doc.data()}
+      });
+
+      return this.dope
     }
 
    

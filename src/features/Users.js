@@ -27,26 +27,21 @@ const postsSlice = createSlice({
   },
   reducers: {
     counter: (state, action) => {
-      let fetchDoc = addProduct.fetchdata();
+      let fetchDoc = addProduct.Get();
+    fetchDoc.then(  el=>{
+    console.log(el)
 
-    fetchDoc.then(   async   (el) => {
-        el.forEach(async (el) => {
-          console.log(el?.name?.stringValue);
-          if (el?.name?.stringValue === "kevin") {
-           el.product.arrayValue.values.forEach(  (prod) => {
-              const { id, compte } = prod.mapValue.fields;
-              let obj = {};
-              obj[id.integerValue] = compte.integerValue;
-              state.datafromFetch = { ...obj };
+    el.product.forEach((elments)=>{
+      check[elments.id] = elments.compte
 
-            });
-          }
-        });
-      });
+    })
+
+    })
+
      
 
-      console.log(state.datafromFetch,'check')
-
+      
+ 
       if (!check[action.payload[1]]) {
         if (action.payload[0] === "+") {
           state.count = state.count + 1;
