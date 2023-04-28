@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   counter,
   selectAllPosts,
+  fetchFromDb
 } from "../../../features/Users";
 import { fetchPosts } from "../../../features/Users";
 import {
@@ -18,6 +19,13 @@ import AddInformations from "../../../components/AddInformations/AddInformations
 import Review from "../../../components/review/Review";
 import AddProducts from '../../../firebase/model/products';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+import { doc,getDoc} from 'firebase/firestore'
+import db from '../../../firebase/config'
+
+
+
+
 
 let tb = [];
 
@@ -35,7 +43,7 @@ function Products(props) {
   let [items, setitem] = useState(1);
   let [theProduct, setproduct] = useState();
   let [category, setcategory] = useState([]);
-  let [products, setproducts] = useState([]);
+  let [fetch, setfetch] = useState(false);
 
 
   let params = useParams();
@@ -57,7 +65,7 @@ function Products(props) {
         }
 
         setproduct([rightItems]);
-        dispatch(counter(["", params[1]]));
+        // dispatch(counter(["", params[1]]));
       });
     }
 
@@ -81,10 +89,28 @@ function Products(props) {
     });
     console.log(id)
      
+    let fetchDoc = async ()=>{
 
-    console.log(addProducts.fetchdata(),'fetch')
+
+     
+
+      try {
+        const docRef = doc(db, "products", id);
+        const docSnap = await getDoc(docRef);
+        console.log(docSnap.data(),'data');
+        dispatch(fetchFromDb([docSnap.data(),params[1]]))
+    } catch(error) {
+        console.log(error)
+    }
+    }
+
+     if(!fetch && id){
+      fetchDoc()
+        setfetch(true)
+     }
+    console.log(number,'number')
   
-  }, [number, params[1], post.length > 0]);
+  }, [number, params[1], post.length > 0,fetch,id]);
   return (
     <Layout>
       <div className={styles["prod"]}>

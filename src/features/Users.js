@@ -30,19 +30,6 @@ const postsSlice = createSlice({
       let fetchDoc = addProduct.Get();
 
 
-      // if(tab.length === 0){
-      //   fetchDoc.then(  el=>{
-
-      //     el.product.forEach((elments)=>{
-      //       check[elments.id] = elments.compte
-   
-             
-      //     })
-      
-      //     })  
-      
-      // }
-
 
 
       
@@ -64,6 +51,7 @@ const postsSlice = createSlice({
       }
       if (action.payload[0] === "" && !check[action.payload[1]]) {
         state.count = 0;
+        console.log(('fresh zero '))
       } else if (action.payload[0] === "" && check[action.payload[1]]) {
         state.count = check[action.payload[1]];
       }
@@ -124,6 +112,32 @@ const postsSlice = createSlice({
 
       // firebase adddoc
     },
+    fetchFromDb :(state,action) =>{
+          console.log(action.payload)
+          let checkProdFromFb = {}
+
+          if(checkProdFromFb[action.payload[1]] === undefined){
+            checkProdFromFb[action.payload[1]] = action.payload[1]
+
+            console.log(checkProdFromFb)
+
+          }
+
+          action.payload[0].product.forEach((data)=>{
+              const {id,compte} = data
+              console.log(data)
+
+              if(checkProdFromFb[id]  !== undefined){
+                console.log('yoooo')
+                state.count = compte
+              }else{
+                state.compte  = 0
+              }
+          })
+          console.log(state.count)
+
+ 
+    }
   },
   extraReducers: {
     [fetchPosts.pending]: (state) => {
@@ -148,6 +162,7 @@ export const {
   addnewproduct,
   objchecked,
   currentProduct,
+  fetchFromDb
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
