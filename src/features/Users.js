@@ -28,17 +28,22 @@ const postsSlice = createSlice({
   reducers: {
     counter: (state, action) => {
       let fetchDoc = addProduct.Get();
-    fetchDoc.then(  el=>{
-    console.log(el)
 
-    el.product.forEach((elments)=>{
-      check[elments.id] = elments.compte
 
-    })
+      // if(tab.length === 0){
+      //   fetchDoc.then(  el=>{
 
-    })
+      //     el.product.forEach((elments)=>{
+      //       check[elments.id] = elments.compte
+   
+             
+      //     })
+      
+      //     })  
+      
+      // }
 
-     
+
 
       
  
@@ -73,6 +78,7 @@ const postsSlice = createSlice({
       //  if the array of prodct exist
       if (action.payload[2]) {
         console.log(checkProduct, "prod");
+
         action.payload[2].forEach((data) => {
           // si il n'y as pas se produit dans l'array ajouter un produits
           if (

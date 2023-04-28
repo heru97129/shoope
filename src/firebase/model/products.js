@@ -28,7 +28,7 @@ class AddProducts {
   async  fetchdata(){
      return   await getDocs(collection(this.db,this.collectionRef)).then((todo) => {
             let data = todo.docs.map((doc) => {
-                return doc._document.data.value.mapValue.fields
+                return doc.data()
             })
             return data
             }).catch((err) => {

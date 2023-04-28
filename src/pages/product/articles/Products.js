@@ -80,7 +80,9 @@ function Products(props) {
       }
     });
     console.log(id)
+     
 
+    console.log(addProducts.fetchdata(),'fetch')
   
   }, [number, params[1], post.length > 0]);
   return (
