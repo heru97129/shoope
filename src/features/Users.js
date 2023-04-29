@@ -15,6 +15,7 @@ const postsSlice = createSlice({
   name: "posts",
   initialState: {
     data: [],
+    tabo : [],
     count: 0,
     countProduct: 0,
     objchecked: {},
@@ -82,7 +83,7 @@ const postsSlice = createSlice({
             checkProduct[action.payload[1]] = action.payload[1];
 
             console.log("new one");
-            tab.push({ ...data });
+            state.tabo.push({ ...data });
           }
 
           if (
@@ -91,7 +92,7 @@ const postsSlice = createSlice({
           ) {
             console.log("already in ");
             // ajoute le compte si le produit existe déja
-            tab.forEach((el) => {
+            state.tabo.forEach((el) => {
               if (Number(el.id) === Number(data.id)) {
                 el.compte = state.count;
               }
@@ -101,7 +102,7 @@ const postsSlice = createSlice({
 
         console.log(tab);
         if (action.payload[3]) {
-          addProduct.updateData(action.payload[3], tab);
+          addProduct.updateData(action.payload[3], state.tabo);
         }
       }
 
@@ -125,7 +126,8 @@ const postsSlice = createSlice({
 
            
            if(tab.length == 0 && action.payload.product){
-            tab = [...action.payload[0].product]
+            console.log('push')
+            state.tabo = [...action.payload[0].product]
             state.currentProduct = [...action.payload[0].product]
             console.log(state.currentProduct)
            }
