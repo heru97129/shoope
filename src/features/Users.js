@@ -63,6 +63,12 @@ const postsSlice = createSlice({
 
       state.countProduct = sumWithInitial;
 
+
+
+
+    
+
+
       //  if the array of prodct exist
       if (action.payload[2]) {
         console.log(checkProduct, "prod");
@@ -107,7 +113,7 @@ const postsSlice = createSlice({
     addnewproduct: (state, action) => {
       console.log(action.payload, "product");
 
-      state.currentProduct = [...action.payload[0]];
+      state.currentProduct = [...tab];
       state.totalprice = action.payload[1];
 
       // firebase adddoc
@@ -115,23 +121,40 @@ const postsSlice = createSlice({
     fetchFromDb :(state,action) =>{
           console.log(action.payload)
           let checkProdFromFb = {}
+           let checkfrDb = false 
 
-          if(checkProdFromFb[action.payload[1]] === undefined){
-            checkProdFromFb[action.payload[1]] = action.payload[1]
-
-            console.log(checkProdFromFb)
-
-          }
-
+           
+           if(tab.length == 0 && action.payload.product){
+            tab = [...action.payload[0].product]
+            state.currentProduct = [...action.payload[0].product]
+            console.log(state.currentProduct)
+           }
+      
           action.payload[0].product.forEach((data)=>{
+           
               const {id,compte} = data
-              console.log(data)
+                 console.log(checkProdFromFb[action.payload[1]],id)
 
-              if(checkProdFromFb[id]  !== undefined){
-                console.log('yoooo')
+                 if(check[id] === undefined){
+                  check[id] = compte
+                  state.objchecked = {...check}
+                 }
+
+                 if(checkProdFromFb[action.payload[1]] === undefined){
+                  checkProdFromFb[action.payload[1]] =  Number(action.payload[1])
+                
+      
+                }
+
+                //   si l'id est présent 
+              if(checkProdFromFb[action.payload[1]]  ===  id){
+    
                 state.count = compte
-              }else{
-                state.compte  = 0
+                 checkfrDb = true
+              }
+              
+              if(!checkfrDb){
+                state.count  = 0
               }
           })
           console.log(state.count)

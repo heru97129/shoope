@@ -97,7 +97,7 @@ function Products(props) {
       try {
         const docRef = doc(db, "products", id);
         const docSnap = await getDoc(docRef);
-        console.log(docSnap.data(),'data');
+     
         dispatch(fetchFromDb([docSnap.data(),params[1]]))
     } catch(error) {
         console.log(error)
@@ -105,12 +105,12 @@ function Products(props) {
     }
 
      if(!fetch && id){
+      console.log('yo fetch')
       fetchDoc()
         setfetch(true)
      }
-    console.log(number,'number')
-  
-  }, [number, params[1], post.length > 0,fetch,id]);
+  setfetch(false)
+  }, [number, params[1], post.length > 0,id]);
   return (
     <Layout>
       <div className={styles["prod"]}>
