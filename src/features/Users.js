@@ -100,7 +100,7 @@ const postsSlice = createSlice({
           }
         });
 
-        console.log(tab);
+        console.log(state.tabo);
         if (action.payload[3]) {
           addProduct.updateData(action.payload[3], state.tabo);
         }
