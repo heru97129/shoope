@@ -29,10 +29,10 @@ const postsSlice = createSlice({
   reducers: {
     counter: (state, action) => {
       let fetchDoc = addProduct.Get();
+   console.log(tab,'tab 11')
 
 
-
-
+console.log(checkProduct)
       
  
       if (!check[action.payload[1]]) {
@@ -52,7 +52,7 @@ const postsSlice = createSlice({
       }
       if (action.payload[0] === "" && !check[action.payload[1]]) {
         state.count = 0;
-        console.log(('fresh zero '))
+
       } else if (action.payload[0] === "" && check[action.payload[1]]) {
         state.count = check[action.payload[1]];
       }
@@ -72,7 +72,7 @@ const postsSlice = createSlice({
 
       //  if the array of prodct exist
       if (action.payload[2]) {
-        console.log(checkProduct, "prod");
+
 
         action.payload[2].forEach((data) => {
           // si il n'y as pas se produit dans l'array ajouter un produits
@@ -83,7 +83,7 @@ const postsSlice = createSlice({
             checkProduct[action.payload[1]] = action.payload[1];
 
             console.log("new one");
-            state.tabo.push({ ...data });
+            tab.push({ ...data });
           }
 
           if (
@@ -92,17 +92,24 @@ const postsSlice = createSlice({
           ) {
             console.log("already in ");
             // ajoute le compte si le produit existe déja
-            state.tabo.forEach((el) => {
+            tab.forEach((el) => {
               if (Number(el.id) === Number(data.id)) {
-                el.compte = state.count;
+    
+                let compte = {compte: state.count}
+                Object.assign(el, compte)
+              }
+
+              if(el.compte === 0){
+              tab =  tab.filter( el => Number(el.id) !== Number(action.payload[1]) )
+               console.log(tab,'delete tab')
               }
             });
           }
         });
 
-        console.log(state.tabo);
+        console.log(tab,'end tab');
         if (action.payload[3]) {
-          addProduct.updateData(action.payload[3], state.tabo);
+          addProduct.updateData(action.payload[3], tab);
         }
       }
 
@@ -123,19 +130,22 @@ const postsSlice = createSlice({
           console.log(action.payload)
           let checkProdFromFb = {}
            let checkfrDb = false 
-
            
-           if(tab.length == 0 && action.payload.product){
+           if(tab.length == 0){
             console.log('push')
-            state.tabo = [...action.payload[0].product]
+            action.payload[0].product.map((data)=>{
+              tab.push({...data})
+              checkProduct[data.id] = data.id
+          })
             state.currentProduct = [...action.payload[0].product]
-            console.log(state.currentProduct)
+
            }
-      
+
+
           action.payload[0].product.forEach((data)=>{
            
               const {id,compte} = data
-                 console.log(checkProdFromFb[action.payload[1]],id)
+             
 
                  if(check[id] === undefined){
                   check[id] = compte
@@ -159,7 +169,7 @@ const postsSlice = createSlice({
                 state.count  = 0
               }
           })
-          console.log(state.count)
+          console.log(state.count,'yooo')
 
  
     }

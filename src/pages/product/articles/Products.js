@@ -87,8 +87,7 @@ function Products(props) {
      
       }
     });
-    console.log(id)
-     
+
     let fetchDoc = async ()=>{
 
 
