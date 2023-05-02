@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from './menu.module.scss'
 import {  Link,  useParams,
   useLocation,
-  useHistory,
-  useRouteMatch} from "react-router-dom";
+} from "react-router-dom";
   import { useSelector, useDispatch,dispatch, createStoreHook } from "react-redux";
 import Shopcard from "../../pages/shopcard/Shopcard";
 

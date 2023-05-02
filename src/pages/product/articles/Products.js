@@ -27,11 +27,11 @@ import db from '../../../firebase/config'
 
 
 
-let tb = [];
 
 function Products(props) {
   let addProducts = new AddProducts()
   const authChange = getAuth();
+  let tb = [];
 
   const dispatch = useDispatch();
   const post = useSelector(selectAllPosts);
@@ -58,8 +58,10 @@ function Products(props) {
     dispatch(fetchPosts("fulfilled"));
     if (post.length > 0) {
       let rightItems = post.find((el) => Number(el.id) === Number(params[1]));
-      let categories = post.find((el) => {
+       post.find((el) => {
         if (rightItems.category === el.category) {
+          console.log(rightItems.category ,el.category)
+
           tb.push(el);
           setcategory(tb.slice(0, 3));
         }
@@ -104,7 +106,6 @@ function Products(props) {
     }
 
      if(!fetch && id){
-      console.log('yo fetch')
       fetchDoc()
         setfetch(true)
      }

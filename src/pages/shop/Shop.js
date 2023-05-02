@@ -24,7 +24,7 @@ function Shop(props) {
       if(post.length > 0){
         
         setdata(post)
-        console.log(data,post )
+
 
       }
   }, [post.length > 0]);

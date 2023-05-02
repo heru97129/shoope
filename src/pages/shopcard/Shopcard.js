@@ -34,7 +34,6 @@ function Shopcard(props) {
 
     products.forEach((element) => {
       tabprice.push(element.price * order[element.id]);
-      console.log(tabprice);
       const initialValue = 0;
       const sumWithInitial = tabprice.reduce(
         (accumulator, currentValue) => accumulator + currentValue,

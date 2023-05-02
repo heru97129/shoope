@@ -15,7 +15,7 @@ const postsSlice = createSlice({
   name: "posts",
   initialState: {
     data: [],
-    tabo : [],
+    tabo: [],
     count: 0,
     countProduct: 0,
     objchecked: {},
@@ -24,35 +24,36 @@ const postsSlice = createSlice({
     error: null,
     currentProduct: [],
     totalprice: 0,
-    datafromFetch : {}
+    datafromFetch: {},
   },
   reducers: {
     counter: (state, action) => {
       let fetchDoc = addProduct.Get();
-   console.log(tab,'tab 11')
+      console.log(tab, "tab 11");
 
-
-console.log(checkProduct)
-      
- 
+      console.log(checkProduct);
+       
+      //  si le produits selectionné  n'est pas présent dans check le rajouté 
       if (!check[action.payload[1]]) {
+
+        //  si l'action est + rajouter 1 state.count et ajouté dans check
         if (action.payload[0] === "+") {
           state.count = state.count + 1;
           check[action.payload[1]] = state.count;
         }
       } else {
+        //  si l'id est présennt rajouté le nombre associé dans l'object 
         state.count = check[action.payload[1]];
         if (action.payload[0] === "+") {
           state.count = state.count + 1;
           check[action.payload[1]] = state.count;
-        } else if (action.payload[0] === "-" && state.count != 0) {
+        } else if (action.payload[0] === "-" && state.count !== 0) {
           state.count = state.count - 1;
           check[action.payload[1]] = state.count;
         }
       }
       if (action.payload[0] === "" && !check[action.payload[1]]) {
         state.count = 0;
-
       } else if (action.payload[0] === "" && check[action.payload[1]]) {
         state.count = check[action.payload[1]];
       }
@@ -64,50 +65,44 @@ console.log(checkProduct)
 
       state.countProduct = sumWithInitial;
 
-
-
-
-    
-
-
       //  if the array of prodct exist
       if (action.payload[2]) {
-
-
         action.payload[2].forEach((data) => {
-          // si il n'y as pas se produit dans l'array ajouter un produits
+          // si l'un des produits match l'id du produits selectionné mais n'est pas présent dans checkProduct
+          //  ajouter le produits dans le tab donc dans la BD
           if (
             Number(data.id) === Number(action.payload[1]) &&
             checkProduct[data.id] === undefined
           ) {
             checkProduct[action.payload[1]] = action.payload[1];
 
-            console.log("new one");
             tab.push({ ...data });
           }
-
+                
+          // si l'un des produits match l'id du produits selectionné et est présent dans checkProduct
+          //  update le produit existant 
           if (
             Number(data.id) === Number(action.payload[1]) &&
             checkProduct[data.id]
           ) {
-            console.log("already in ");
             // ajoute le compte si le produit existe déja
             tab.forEach((el) => {
               if (Number(el.id) === Number(data.id)) {
-    
-                let compte = {compte: state.count}
-                Object.assign(el, compte)
+                let compte = { compte: state.count };
+                Object.assign(el, compte);
               }
-
-              if(el.compte === 0){
-              tab =  tab.filter( el => Number(el.id) !== Number(action.payload[1]) )
-               console.log(tab,'delete tab')
+                 
+              //  si le nombre de produits est égale a 0 retiré le produit 
+              if (el.compte === 0) {
+                tab = tab.filter(
+                  (el) => Number(el.id) !== Number(action.payload[1])
+                );
               }
             });
           }
         });
-
-        console.log(tab,'end tab');
+          
+        //  si l'id est renseigner update la DB
         if (action.payload[3]) {
           addProduct.updateData(action.payload[3], tab);
         }
@@ -119,60 +114,54 @@ console.log(checkProduct)
       state.objchecked = { ...check };
     },
     addnewproduct: (state, action) => {
-      console.log(action.payload, "product");
-
+      //  ajoute le nombre de produits total 
       state.currentProduct = [...tab];
+      //  ajoute le prix total des produits cummulé 
       state.totalprice = action.payload[1];
 
       // firebase adddoc
     },
-    fetchFromDb :(state,action) =>{
-          console.log(action.payload)
-          let checkProdFromFb = {}
-           let checkfrDb = false 
-           
-           if(tab.length == 0){
-            console.log('push')
-            action.payload[0].product.map((data)=>{
-              tab.push({...data})
-              checkProduct[data.id] = data.id
-          })
-            state.currentProduct = [...action.payload[0].product]
+    fetchFromDb: (state, action) => {
 
-           }
+      let checkProdFromFb = {};
+      let checkfrDb = false;
+     
 
+      //  si en lancant l'app  l'array tab est vide ajoute se qui a dans la BD
+      if (tab.length == 0) {
+        action.payload[0].product.map((data) => {
+          tab.push({ ...data });
+          checkProduct[data.id] = data.id;
+        });
+        state.currentProduct = [...action.payload[0].product];
+      }
 
-          action.payload[0].product.forEach((data)=>{
-           
-              const {id,compte} = data
-             
+      action.payload[0].product.forEach((data) => {
+        const { id, compte } = data;
+          
+        //  si l'id du produit n'est pas présent dans l'object check rajoute le 
+        if (check[id] === undefined) {
+          check[id] = compte;
+          state.objchecked = { ...check };
+        }
+          
 
-                 if(check[id] === undefined){
-                  check[id] = compte
-                  state.objchecked = {...check}
-                 }
+        //  si l'id n'est pas présent dans l'object rajoute le
+        if (checkProdFromFb[action.payload[1]] === undefined) {
+          checkProdFromFb[action.payload[1]] = Number(action.payload[1]);
+        }
 
-                 if(checkProdFromFb[action.payload[1]] === undefined){
-                  checkProdFromFb[action.payload[1]] =  Number(action.payload[1])
-                
-      
-                }
-
-                //   si l'id est présent 
-              if(checkProdFromFb[action.payload[1]]  ===  id){
-    
-                state.count = compte
-                 checkfrDb = true
-              }
-              
-              if(!checkfrDb){
-                state.count  = 0
-              }
-          })
-          console.log(state.count,'yooo')
-
- 
-    }
+        //   si l'id est présent dans l'object ajoute le nombre d'article par object
+        if (checkProdFromFb[action.payload[1]] === id) {
+          state.count = compte;
+          checkfrDb = true;
+        }
+          //  si il n'est pas présent dans l'object  ajoute 0 au compte du produit 
+        if (!checkfrDb) {
+          state.count = 0;
+        }
+      });
+    },
   },
   extraReducers: {
     [fetchPosts.pending]: (state) => {
@@ -197,7 +186,7 @@ export const {
   addnewproduct,
   objchecked,
   currentProduct,
-  fetchFromDb
+  fetchFromDb,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
