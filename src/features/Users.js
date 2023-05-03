@@ -28,11 +28,8 @@ const postsSlice = createSlice({
   },
   reducers: {
     counter: (state, action) => {
-      let fetchDoc = addProduct.Get();
-      console.log(tab, "tab 11");
 
-      console.log(checkProduct);
-       
+
       //  si le produits selectionné  n'est pas présent dans check le rajouté 
       if (!check[action.payload[1]]) {
 
@@ -126,13 +123,18 @@ const postsSlice = createSlice({
       let checkProdFromFb = {};
       let checkfrDb = false;
      
-
+      let total = 0
       //  si en lancant l'app  l'array tab est vide ajoute se qui a dans la BD
       if (tab.length == 0) {
         action.payload[0].product.map((data) => {
           tab.push({ ...data });
           checkProduct[data.id] = data.id;
+        
+
+          total += data.compte
+          
         });
+        state.countProduct  = total
         state.currentProduct = [...action.payload[0].product];
       }
 
